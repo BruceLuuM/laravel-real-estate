@@ -1,0 +1,396 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+blockquote,
+dl,
+dd {
+    margin: 0;
+}
+ul[role="list"],
+ol[role="list"] {
+    list-style: none;
+}
+html:focus-within {
+    scroll-behavior: smooth;
+}
+body {
+    min-height: 100vh;
+    text-rendering: optimizeSpeed;
+    line-height: 1.5;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+a:not([class]) {
+    text-decoration-skip-ink: auto;
+}
+img,
+picture {
+    max-width: 100%;
+    display: block;
+    object-fit: cover;
+}
+input,
+button,
+textarea,
+select {
+    font: inherit;
+}
+/* Dashboard style*/
+
+#dashboardMainContainer {
+    display: flex;
+    flex-direction: row;
+}
+.dashboard_sidebar {
+    width: 20%;
+    background: #323232;
+    height: 100vh;
+    position: sticky;
+    top: 0;
+}
+.dashboard_content_container {
+    width: 80%;
+    background: #f4f6f9;
+}
+
+h3.dashboard_logo {
+    color: #285ea6;
+    font-size: 80px;
+    text-align: center;
+}
+.dashboard_sidebar_user {
+    text-align: center;
+    position: relative;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #fff;
+}
+.dashboard_sidebar_user img {
+    width: 60px;
+    display: inline-block;
+    border-radius: 50%;
+    border: 1px solid #285ea6;
+    margin-right: 5px;
+    vertical-align: middle;
+}
+.dashboard_sidebar_user span {
+    top: 20%;
+    font-size: 18px;
+    text-transform: uppercase;
+    color: #fff;
+    display: inline-block;
+}
+
+ul.dashboard_menu_lists {
+    padding: 0px;
+    margin-top: 20px;
+}
+
+ul.dashboard_menu_lists li {
+    list-style-type: none;
+    padding: 15px 10px;
+    font-size: 18px;
+    text-transform: uppercase;
+}
+ul.dashboard_menu_lists li a {
+    text-decoration: none;
+    color: #fff;
+    display: block;
+    font-size: 20px;
+}
+ul.dashboard_menu_lists li a i {
+    font-size: 25px;
+}
+
+ul.dashboard_menu_lists li:hover {
+    background: #285ea6;
+    color: #fff;
+    transition: 0.3s all;
+}
+.dashboard_topNav {
+    background: #fff;
+    padding: 20px;
+    position: sticky;
+    top: 0;
+}
+.dashboard_topNav a {
+    color: #848383;
+    font-size: 20px;
+    text-decoration: none;
+}
+a#logoutBtn {
+    float: right;
+}
+.dashboard_content {
+    padding: 50px 10px 10px 10px;
+}
+
+.dashboard_content_main {
+    background: #fff;
+    min-height: 800px;
+    height: fit-content;
+}
+
+/* admin form*/
+
+body#adminBody {
+    background-color: #fff;
+    padding: 10px;
+}
+body {
+    font-family: Arial, Helvetica, sans-serif, cursive;
+}
+div.adminHeader {
+    text-align: center;
+}
+
+div.adminInputContainer {
+    margin-top: 15px;
+}
+
+div.adminInputContainer input,
+textarea,
+select {
+    height: 40px;
+    width: 100%;
+    font-size: 16px;
+    padding: 6px;
+    font-weight: lighter;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    border-width: 1.5px;
+    border-style: solid;
+    resize: none;
+}
+
+div.adminInputContainer .up_img {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+div.adminButtonContainer {
+    display: flex;
+    margin-top: 20px;
+    text-align: center;
+}
+div.adminButtonContainer button {
+    margin-left: 30%;
+    flex-grow: 2;
+    font-size: 20px;
+    padding: 4px 10px;
+    background: #f77f00;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+}
+
+/* pop up window */
+
+.error {
+    color: #ff0000;
+}
+.box {
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 35px;
+    border: 2px solid #fff;
+    border-radius: 20px/50px;
+    text-align: center;
+}
+.box a {
+    text-decoration: none;
+    color: #285ea6;
+}
+
+.button:link,
+.button:visited {
+    background-color: white;
+    color: black;
+    border: 2px solid green;
+    padding: 1px 2px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.button:hover,
+.button:active {
+    background-color: green;
+    color: white;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.7);
+    visibility: hidden;
+    opacity: 0;
+}
+.overlay:target {
+    visibility: visible;
+    opacity: 1;
+}
+
+.popup {
+    margin: 70px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 5px;
+    width: 35%;
+    position: relative;
+}
+
+.popup h2 {
+    margin-top: 0;
+    color: #333;
+    font-family: Tahoma, Arial, sans-serif;
+}
+.popup .close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    font-size: 30px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #333;
+}
+.popup .close:hover {
+    color: #285ea6;
+}
+.popup .content {
+    max-height: 30%;
+    overflow: auto;
+}
+
+@media screen and (max-width: 1000px) {
+    .box {
+        width: 70%;
+    }
+    .popup {
+        width: 70%;
+    }
+}
+/* table */
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th,
+td {
+    text-align: left;
+    padding: 8px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 13px;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+th {
+    background-color: #285ea6;
+    color: white;
+}
+
+td .customword {
+    width: 165px;
+    overflow-wrap: break-word;
+}
+
+td .customdescription {
+    width: 165px;
+}
+.newtdFunctionStyle {
+    width: 300px;
+}
+.tdDescriptionStyle {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+/* posted atribute form */
+#posted_news {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 20px;
+}
+
+#posted_news td,
+#posted_news th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#posted_news tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+#posted_news tr:hover {
+    background-color: #ddd;
+}
+
+#posted_news th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: white;
+    color: black;
+}
+
+td a {
+    cursor: pointer;
+    color: black;
+    font-weight: normal;
+}
+td a:hover {
+    color: #83cff3;
+}
+
+/* create form */
+.adminCreateInvesterForm {
+    padding: 10px;
+}
+.base {
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.base input {
+    width: 100%;
+    border-radius: 5px;
+    height: 40px;
+}
+.base img {
+    width: 15%;
+}
+
+.base_options {
+    width: 100%;
+}
+.base textarea {
+    height: 200px;
+}
+
+/* CK editor style  */
+.ck.ck-content:not(.ck-comment__input *) {
+    height: 500px;
+    overflow-y: auto;
+}

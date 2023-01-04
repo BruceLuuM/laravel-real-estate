@@ -1,0 +1,143 @@
+form {
+    padding: 0;
+    margin: 0;
+}
+
+.form {
+    display: flex;
+    justify-content: space-between;
+}
+
+.user_sidebar_container {
+    width: 24%;
+    display: flex;
+    flex-direction: column;
+}
+
+.user_post_container {
+    width: 75%;
+    display: flex;
+    flex-direction: column;
+}
+
+.post_page {
+    background-color: #fff;
+    margin: 10px 0;
+    padding: 10px;
+}
+.post_page h3 {
+    margin: 0;
+}
+.post_page a {
+    text-decoration: none;
+}
+.post_page a:hover {
+    text-decoration: underline;
+    color: #83cff3;
+}
+
+.base_container {
+    margin-top: 10px;
+}
+.base {
+    display: flex;
+    flex-direction: column;
+}
+.base label {
+    font-weight: bold;
+}
+
+.base input {
+    border: 2px solid #8f8f8f;
+    border-radius: 5px;
+    padding: 5px;
+    margin-bottom: 10px;
+    height: 30px;
+}
+
+.base textarea {
+    border: 2px solid #8f8f8f;
+    border-radius: 5px;
+    height: 200px;
+}
+
+.law_deco {
+    display: flex;
+    justify-content: space-between;
+}
+.law_deco .base {
+    width: 49.5%;
+}
+
+/* posted news */
+
+#posted_news {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 20px;
+}
+
+#posted_news td,
+#posted_news th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#posted_news tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+#posted_news tr:hover {
+    background-color: #ddd;
+}
+
+#posted_news th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: white;
+    color: black;
+}
+
+td a {
+    cursor: pointer;
+    color: black;
+    font-weight: normal;
+}
+td a:hover {
+    color: #83cff3;
+}
+
+.base_options {
+    display: flex;
+    flex-direction: row;
+}
+
+.base select {
+    width: 100%;
+    border: 2px solid #8f8f8f;
+    border-radius: 5px;
+    height: 34px;
+}
+
+.base input:focus {
+    background-color: rgb(72, 98, 228, 0.06);
+}
+
+/* CK editor style  */
+.ck.ck-content:not(.ck-comment__input *) {
+    height: 500px;
+    overflow-y: auto;
+}
+
+/* mobile adjust */
+
+@media screen and (max-width: 768px) {
+    .user_sidebar_container {
+        display: none;
+    }
+    .user_post_container {
+        width: 100%;
+    }
+}

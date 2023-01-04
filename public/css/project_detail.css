@@ -1,0 +1,162 @@
+.Detail_container {
+    max-width: 1200px;
+    margin: 10px auto;
+}
+.main_detail {
+    background-color: #fff;
+    width: 100%;
+}
+.Detail_project {
+    width: 72%;
+    background-color: #fff;
+    margin: 0;
+    padding: 10px;
+}
+.Detail_project img {
+    width: 100%;
+}
+
+.sidebar_project {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    height: 90vh;
+}
+
+.list_sidebar_project {
+    padding: 5px;
+    margin: 10px 0 0 10px;
+    list-style: none;
+    background-color: #fff;
+}
+
+.list_sidebar_project a {
+    text-align: left;
+    text-decoration: none;
+    color: #000;
+    display: block;
+    list-style: none;
+}
+.main {
+    max-width: 1200px;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 10px 10px 10px;
+}
+
+.invester_container_project {
+    display: flex;
+    border: 2px solid #000;
+    border-radius: 5px;
+}
+.invester_container_project a {
+    padding: 10px;
+    color: #000;
+    text-decoration: none;
+}
+
+.invester_container_project img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+}
+
+.detail-project-img img {
+    object-fit: cover;
+    width: 450px;
+    height: 300px;
+    padding-top: 10px;
+}
+
+.detail-project-info {
+    padding-left: 10px;
+    width: 70%;
+}
+
+.detail-project-info .warning {
+    display: flex;
+    flex-direction: row;
+}
+
+.detail-project-info .warning a {
+    text-decoration: none;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.detail-project-info .warning a:hover {
+    text-decoration: underline;
+    color: rgb(51, 94, 205);
+}
+
+.detail-project-info .warning img {
+    width: 14px;
+    height: 14px;
+}
+
+.detail-user {
+    display: flex;
+    flex-direction: row;
+}
+
+.detail-user img {
+    width: 80px;
+    height: 80px;
+}
+
+.user-contact {
+    display: flex;
+    flex-direction: column;
+    width: 270px;
+    border: 1px solid #000;
+}
+.user-contact button {
+    width: 100%;
+    height: 30px;
+    margin-bottom: 10px;
+    background-color: #f7841b;
+    color: #fff;
+    border: none;
+    font-weight: bold;
+}
+.user-contact .fast-contact {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+.user-contact .fast-contact a {
+    display: flex;
+    width: 40%;
+    padding: 5px;
+    font-weight: bold;
+    text-decoration: none;
+    text-transform: uppercase;
+    color: rgb(51, 94, 205);
+    border: 2px solid rgb(51, 94, 205);
+}
+
+.Diff_project {
+    width: 72%;
+    margin-bottom: 10px;
+}
+
+/* mobile adjust */
+
+@media screen and (max-width: 768px) {
+    .Detail_project,
+    .detail-project-img img,
+    .detail-info,
+    .detail-info,
+    .inLogo_container,
+    .Diff_project {
+        width: 100%;
+        object-fit: cover;
+    }
+    .detail-project-info {
+        width: 100%;
+        padding-left: 0;
+    }
+    .main {
+        flex-direction: column;
+    }
+}
