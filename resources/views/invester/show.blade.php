@@ -4,11 +4,12 @@
 
         <div class="info">
             <div class="inLogo_container">
-                <img src="https://staticfile.batdongsan.com.vn/images/avatar/enterprise-banner-default_web.png" alt="">
+                <img src="https://staticfile.batdongsan.com.vn/images/avatar/enterprise-banner-default_web.png"
+                    alt="invester-banner">
 
                 <div class="inLogo_img">
                     <img src="{{$invester->invester_logo ? asset('storage/'. $invester->invester_logo) : asset('/images/no_image.jpg')}}"
-                        alt="">
+                        alt="invester-logo-placeholder">
                 </div>
                 <div class="inLogo_name">
                     <div class="inName">
@@ -29,19 +30,19 @@
                 <hr color="#000" size="1" width="100%">
                 {!! $invester->description !!}
             </div>
-            <div class="inLogo_container" style="min-height:300px">
+            <div class="inLogo_container">
                 <h3>
                     <span>DỰ ÁN THUỘC CHỦ ĐẦU TƯ</span>
                 </h3>
                 <x-projects.list-ahead-projects :projects="$projects" />
             </div>
-            <div class="inLogo_container" style="min-height:250px">
+            <div class="inLogo_container">
                 <h3>
                     <span>Đánh giá:</span>
                 </h3>
                 <x-projects.list-ahead-projects :projects="$projects" />
             </div>
-            <div class="inLogo_container" style="min-height:250px">
+            <div class="inLogo_container">
                 <h3>
                     <span>Nội dung đánh giá:</span>
                 </h3>

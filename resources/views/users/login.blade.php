@@ -23,7 +23,9 @@
                 </div>
 
                 <div class="user-form">
-                    <span>THÔNG TIN ĐĂNG NHẬP</span>
+                    <h3>
+                        <span>THÔNG TIN ĐĂNG NHẬP</span>
+                    </h3>
                     <form action="{{Route('authenticate')}}" method="post">
                         @csrf
                         <div class="InputContainer">
@@ -41,7 +43,9 @@
                             cookie của chúng tôi.</p>
                         <button name="commit">Đăng nhập</button>
                     </form>
+
                     <p><a href="{{route('register');}}">Đăng ký tài khoản</a>\<a href="">Quên mật khẩu</a></p>
+                    <p><a href="{{route('adminlogin')}}" style="color: blue">Admin?</a></p>
                 </div>
             </div>
         </div>

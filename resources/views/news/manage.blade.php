@@ -26,7 +26,7 @@
                                 <td style="width:50px;">{{$index+1}}</td>
                                 <td style="width:105px; height: 105px;"><img
                                         src="{{$new->images ? asset('storage/'. $new->images) : asset('/images/no_image.jpg')}}"
-                                        alt="" style="width:100px; height:100px;"></td>
+                                        alt="new-image-holder" style="width:100px; height:100px;"></td>
                                 <td style="width:550px">
                                     <div class="news_des" style="padding:0;">
                                         <p style="font-weight:bold; ">{{$new->news_header}}</p>
@@ -35,27 +35,29 @@
                                                     $new->price_unit}}</strong> </p>
                                             <p> {{$new->area . ' '. $new->area_unit }} </p>
                                         </div>
-                                        <div class="text"
-                                            style="overflow: hidden; text-overflow: ellipsis;  display: -webkit-box; -webkit-line-clamp: 2; line-clamp: 2;-webkit-box-orient: vertical;">
+                                        <div class="description_data_view">
                                             <p>{{$new->description}}</p>
                                         </div>
                                         <div class="user">
-                                            <p><img src="/images/icon/icons8-clock-50.png" alt=""
-                                                    style="width:20px;height:20px;padding-top:3px"></p>
-                                            <p style="padding-top:6px">00:00:00</p>
-
+                                            <p><i class="fa fa-clock-o" aria-hidden="true"> </i>
+                                                {{now()->diffInMinutes($new->updated_at)}} phút trước
+                                            </p>
                                             <form action="{{route('userDestroyNews',['new'=>$new->id]);}}"
                                                 method="POST">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button onclick="return ComfirmDelete();"
-                                                    style="border: none;cursor: pointer;">🗑️ Xóa tin</button>
+                                                    style="border: none;cursor: pointer; color:red"><i
+                                                        class="fa fa-trash-o" aria-hidden="true"></i>
+                                                    Xóa tin</button>
                                             </form>
                                         </div>
                                     </div>
                                 </td>
                                 <td>
-                                    <a href="{{Route('userEditNews',['new'=>$new->id]);}}">Cập nhật</a>
+                                    <a href="{{Route('userEditNews',['new'=>$new->id]);}}"><i class="fa fa-wrench"
+                                            aria-hidden="true"></i>
+                                        Cập nhật</a>
                                 </td>
                             </tr>
                             @endforeach
@@ -69,27 +71,5 @@
         </div>
     </x-card>
 </x-layout>
-<script>
-    function ComfirmDelete() {
-        return confirm('Bạn có chắc chắn muốn xóa tin này không?');
-    }
 
-    function validateForm() {
-
-        // var img = document.getElementById('img');
-        // if (isFileImage(img.value)) {
-        //     img.setCustomValidity('Sai định dạng ảnh!!!');
-        // }
-
-        var fname = document.getElementById('news_header');
-        if (fname.value == '') {
-            fname.setCustomValidity('Bạn cần phải nhập tiêu đề trước !');
-        } else {
-            fname.setCustomValidity('');
-        }
-
-        return true;
-    }
-
-    document.getElementsByName('create')[0].onclick = validateForm;
-</script>
+<script type="text/javascript" src="{{ asset('js/confirm-delete.js') }}"></script>

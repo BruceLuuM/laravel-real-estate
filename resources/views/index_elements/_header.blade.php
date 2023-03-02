@@ -5,13 +5,13 @@
         </div>
 
         @auth
-        @if(auth()->user()->type == 'admin')
+        @if(auth()->user()->type == 'VIP')
         <div class="login">
             <button>
-                <a href="{{Route('adminPage')}}">To admin page: {{auth()->user()->name}} </a>
+                <a href="{{Route('userManageNews')}}">V.I.P: {{auth()->user()->name}} </a>
                 <a>|</a>
             </button>
-            <form action="{{Route('adminLogout')}}" method="post">
+            <form action="{{Route('userLogout')}}" method="post">
                 @csrf
                 <button type="submit"><a>Logout</a></button>
             </form>
@@ -41,9 +41,9 @@
     <div class="logo-container">
         <div class="extension">
             <div class="logobar">
-                <a class="openSidepanel" onclick="openNav()"> <i class="fa fa-bars" aria-hidden="true"></i> </a>
-                <a href="/"><img src="https://cdn.batdongsan.vn/upload/thumb/file/2022/10/0001/logo.png" alt=""
-                        height=" 30px"></a>
+                <p class="openSidepanel" onclick="openNav()"> <i class="fa fa-bars" aria-hidden="true"></i> </p>
+                <a href="/"><img src="https://cdn.batdongsan.vn/upload/thumb/file/2022/10/0001/logo.png"
+                        alt="company-logo" height=" 30px"></a>
             </div>
 
             <div id="mySidepanel" class="sidepanel">
@@ -73,40 +73,42 @@
                         </div>
                     </div>
                 </div>
-                <a href="javascript:void(0)" class="closeSidepanel" onclick="closeNav()"></a>
+                <p href="javascript:void(0)" class="closeSidepanel" onclick="closeNav()"></p>
             </div>
             <div class="toggle_searchbar">
-                <form action="" id="default_search">
-                    <div class="searchbar">
-                        <div class="fastsearch">
-                            <select id="#">
-                                <option value="" disabled selected>Nhu cầu</option>
-                                <option value="Sell">Bán</option>
-                                <option value="forHide">Cho Thuê</option>
-                            </select>
+                <div id="default_search">
+                    <form action="">
+                        <div class="searchbar">
+                            <div class="fastsearch">
+                                <select id="#">
+                                    <option value="" disabled selected>Nhu cầu</option>
+                                    <option value="Sell">Bán</option>
+                                    <option value="forHide">Cho Thuê</option>
+                                </select>
+                            </div>
+                            <div class="fastsearch">
+                                <select name="category">
+                                    <option value="" disabled selected>Phân khúc</option>
+                                    @foreach($categories as $category)
+                                    <option value="{{$category->id}}">{{$category->type_name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="fastsearch">
+                                <select name="province_id">
+                                    <option value="" disabled selected>Khu vực</option>
+                                    @foreach($provinces as $province)
+                                    <option value="{{$province->code}}">{{$province->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="search_function disable-select">
+                                <button style="background-color: #f7841b"> <i class="fa fa-search"
+                                        aria-hidden="true"></i>TÌM KIẾM</button>
+                            </div>
                         </div>
-                        <div class="fastsearch">
-                            <select name="category">
-                                <option value="" disabled selected>Phân khúc</option>
-                                @foreach($categories as $category)
-                                <option value="{{$category->id}}">{{$category->type_name}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="fastsearch">
-                            <select name="province_id">
-                                <option value="" disabled selected>Khu vực</option>
-                                @foreach($provinces as $province)
-                                <option value="{{$province->code}}">{{$province->name}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="search_function disable-select">
-                            <button style="background-color: #f7841b"> <i class="fa fa-search"
-                                    aria-hidden="true"></i>TÌM KIẾM</button>
-                        </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
                 <div class="search_function disable-select">
                     <a onclick="openSearchBar()"
                         style="text-decoration:none; color:black; cursor: pointer; padding: 10px">

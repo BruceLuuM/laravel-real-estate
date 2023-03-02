@@ -6,7 +6,7 @@
     <div class="gallery-cell">
         <a href="{{route('showProject', ['project'=>$project->slug])}}">
             <img src="{{$project->images ? asset('storage/'. $project->images) : asset('/images/no_image.jpg')}}"
-                alt="">
+                alt="new-image-holder">
             <p><strong>{{$project->name}}</strong></p>
         </a>
     </div>

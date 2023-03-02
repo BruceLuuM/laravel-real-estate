@@ -3,11 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\News;
-use App\Models\Wards;
 use App\Models\Project;
 use App\Models\Category;
 use App\Models\Invester;
-use App\Models\Districts;
 
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -41,10 +39,7 @@ class NewsController extends Controller
     //show create
     public function create()
     {
-        return view('news.create', [
-            'districts' => Districts::all(),
-            'wards' => Wards::all(),
-        ]);
+        return view('news.create');
     }
 
     //store new data
@@ -59,13 +54,13 @@ class NewsController extends Controller
             'area' => 'required',
             'area_unit' => 'required',
             'price' => 'required',
-            'price_unit' => 'required',
+            'price_unit' => 'nullable',
             'news_header' => 'required',
             'description' => 'required',
-            'attribute' => 'required',
-            'num_bed_rooms' => 'required',
-            'num_wc_rooms' => 'required',
-            'law_related_info' => 'required',
+            'attribute' => 'nullable',
+            'num_bed_rooms' => 'nullable',
+            'num_wc_rooms' => 'nullable',
+            'law_related_info' => 'nullable',
         ]);
 
         if ($request->hasFile('images')) {
@@ -74,6 +69,7 @@ class NewsController extends Controller
 
         $formFields['user_id'] = auth()->id();
         $formFields['slug'] = Str::slug($request->news_header);
+
         News::create($formFields);
 
         return redirect('/');
@@ -83,9 +79,7 @@ class NewsController extends Controller
     public function edit(News $new)
     {
         return view('news.edit', [
-            'new' => $new,
-            'districts' => Districts::all(),
-            'wards' => Wards::all(),
+            'new' => $new
         ]);
     }
 
@@ -104,15 +98,15 @@ class NewsController extends Controller
             'province_id' => 'required',
             // 'address' => 'required',
             'area' => 'required',
-            'area_unit' => 'required',
+            'area_unit' => 'nullable',
             'price' => 'required',
             'price_unit' => 'required',
             'news_header' => 'required',
             'description' => 'required',
-            'attribute' => 'required',
-            'num_bed_rooms' => 'required',
-            'num_wc_rooms' => 'required',
-            'law_related_info' => 'required',
+            'attribute' => 'nullable',
+            'num_bed_rooms' => 'nullable',
+            'num_wc_rooms' => 'nullable',
+            'law_related_info' => 'nullable',
         ]);
 
         if ($request->hasFile('images')) {
@@ -133,8 +127,7 @@ class NewsController extends Controller
     //delete ~ destroy
     public function destroy(News $new)
     {
-
-        // mmake sure logged in user is owner
+        // make sure logged in user is owner
         if ($new->user_id != auth()->id()) {
             abort(403, 'Unauthorized Action');
         }
@@ -150,9 +143,4 @@ class NewsController extends Controller
     {
         return view('news.manage', ['news' => auth()->user()->news]);
     }
-
-    // public function adminManage()
-    // {
-    //     return view('admin.manage_news.manage', ['news' => auth()->user()->news]);
-    // }
 }

@@ -43,61 +43,15 @@
     margin-right: 7px;
 }
 
-.detail-user {
-    display: flex;
-    flex-direction: row;
-}
 .detail-user p {
     text-align: center;
     margin: auto;
 }
 
-.user-contact {
-    display: flex;
-    flex-direction: column;
-    width: 270px;
-    border: 1px solid #000;
-}
-.user-contact button {
-    width: 100%;
-    height: 30px;
-    margin-bottom: 10px;
-    background-color: #f7841b;
-    color: #fff;
-    border: none;
-    font-weight: bold;
-}
-.user-contact .fast-contact {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 5px;
-}
-.user-contact .fast-contact a {
-    text-align: center;
-    width: 40%;
-    padding: 5px;
-    font-weight: bold;
-    text-decoration: none;
-    text-transform: uppercase;
-    color: rgb(51, 94, 205);
-    border: 2px solid rgb(51, 94, 205);
-}
-.user-contact .fast-contact img {
-    width: 29px;
-    height: 25px;
-    padding-right: 4px;
-}
 /* mobile adjust */
 
 @media screen and (max-width: 768px) {
     .detail-img img {
-        width: 100%;
-    }
-    .main {
-        flex-direction: column;
-    }
-    .user-contact,
-    .detail-info {
         width: 100%;
     }
 }

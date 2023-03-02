@@ -227,57 +227,8 @@ div.adminButtonContainer button {
     color: white;
 }
 
-.overlay {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: rgba(0, 0, 0, 0.7);
-    visibility: hidden;
-    opacity: 0;
-}
-.overlay:target {
-    visibility: visible;
-    opacity: 1;
-}
-
-.popup {
-    margin: 70px auto;
-    padding: 20px;
-    background: #fff;
-    border-radius: 5px;
-    width: 35%;
-    position: relative;
-}
-
-.popup h2 {
-    margin-top: 0;
-    color: #333;
-    font-family: Tahoma, Arial, sans-serif;
-}
-.popup .close {
-    position: absolute;
-    top: 20px;
-    right: 30px;
-    font-size: 30px;
-    font-weight: bold;
-    text-decoration: none;
-    color: #333;
-}
-.popup .close:hover {
-    color: #285ea6;
-}
-.popup .content {
-    max-height: 30%;
-    overflow: auto;
-}
-
 @media screen and (max-width: 1000px) {
     .box {
-        width: 70%;
-    }
-    .popup {
         width: 70%;
     }
 }
@@ -393,4 +344,12 @@ td a:hover {
 .ck.ck-content:not(.ck-comment__input *) {
     height: 500px;
     overflow-y: auto;
+}
+
+/* ---------------extension add style-----------------  */
+/* select2 */
+.select2-container--default
+    .select2-selection--multipl
+    .select2-selection__choice {
+    background-color: #00f !important;
 }

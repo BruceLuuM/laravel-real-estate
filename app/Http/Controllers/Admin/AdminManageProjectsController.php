@@ -25,8 +25,6 @@ class AdminManageProjectsController extends Controller
     {
         return view('admin.manage_projects.create', [
             'investers' => Invester::all(),
-            'districts' => Districts::all(),
-            'wards' => Wards::all(),
         ]);
     }
 
@@ -61,8 +59,6 @@ class AdminManageProjectsController extends Controller
         return view('admin.manage_projects.edit', [
             'project' => $project,
             'investers' => Invester::all(),
-            'districts' => Districts::all(),
-            'wards' => Wards::all(),
         ]);
     }
 

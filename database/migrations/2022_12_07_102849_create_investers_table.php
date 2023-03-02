@@ -19,7 +19,7 @@ return new class extends Migration
             $table->mediumText('brief');
             $table->longText('description');
             $table->integer('nums_project')->default('0');
-            $table->string('invester_logo');
+            $table->string('invester_logo')->nullable();
             $table->timestamps();
         });
     }

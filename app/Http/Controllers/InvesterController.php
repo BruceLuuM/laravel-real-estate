@@ -19,7 +19,6 @@ class InvesterController extends Controller
 
     public function show(Invester $invester)
     {
-        dd($invester);
         return view('invester.show', [
             'invester' => $invester,
             'categories' => Category::latest()->paginate(10),

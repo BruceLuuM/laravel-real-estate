@@ -1,0 +1,142 @@
+@extends('adminLTE.layout.master')
+@section('title','Admin User Management')
+@section('UsersManagement','active')
+
+@section('page-level-style')
+<style type="text/css">
+
+</style>
+@endsection
+
+@section('content')
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Manage user</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active">Manage user</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+    <!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <a class="btn btn-success float-sm-right" href="{{route('adminCreateUser')}}">Add a
+                            User</a>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <table id="Usr" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Phone number</th>
+                                    <th>Created_at</th>
+                                    <th>Updated_at</th>
+                                    <th>Function</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($users as $user)
+                                <tr>
+                                    <td>
+                                        {{$user->id}}
+                                    </td>
+                                    <td>
+                                        {{$user->name}}
+                                    </td>
+                                    <td>
+                                        {{$user->email}}
+                                    </td>
+                                    <td>
+                                        {{$user->phonenumber}}
+                                    </td>
+                                    <td>
+                                        {{$user->created_at}}
+                                    </td>
+                                    <td>
+                                        {{$user->updated_at}}
+                                    </td>
+                                    <td class="project-actions text-right">
+                                        <a class="btn btn-primary btn-sm"
+                                            href="{{route('adminShowUser',['user'=>$user->id])}}">
+                                            <i class="fas fa-folder">
+                                            </i>
+                                            View
+                                        </a>
+                                        <a class="btn btn-info btn-sm"
+                                            href="{{route('adminEditUser',['user'=>$user->id])}}">
+                                            <i class="fas fa-pencil-alt">
+                                            </i>
+                                            Edit
+                                        </a>
+                                        <a class="btn p-0">
+                                            <form action="{{route('adminDeleteUser',['user'=>$user->id]);}}"
+                                                method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button class="btn btn-danger btn-sm"><i
+                                                        class="fas fa-trash"></i>Delete</button>
+                                            </form>
+                                        </a>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Phone number</th>
+                                    <th>Created_at</th>
+                                    <th>Updated_at</th>
+                                    <th>Function</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+</section>
+<!-- /.content -->
+@endsection
+@push('manage_user_table')
+<!-- Page specific script -->
+<script>
+    $(function () {
+        $("#Usr")
+          .DataTable({
+            responsive: true,
+            lengthChange: false,
+            autoWidth: false,
+            buttons: ["copy", "csv", "excel", "pdf", "print", "colvis"],
+          })
+          .buttons()
+          .container()
+          .appendTo("#Usr_wrapper .col-md-6:eq(0)");
+      });
+</script>
+@endpush

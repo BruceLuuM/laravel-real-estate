@@ -1,9 +1,3 @@
-span {
-    border-left: 5px solid #285ea6;
-    color: #285ea6;
-    font-weight: bold;
-    padding-left: 10px;
-}
 p {
     margin: 0;
     padding-bottom: 3px;
@@ -16,6 +10,30 @@ body {
         sans-serif, cursive;
     background-color: #ededed;
     margin: 0;
+}
+h3 span {
+    border-left: 5px solid #285ea6;
+    color: #285ea6;
+    font-weight: bold;
+    padding-left: 10px;
+}
+.description_data_view {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.post_new_button {
+    background-color: #285ea6;
+    border: 2px solid #fff;
+    border-radius: 7px;
+    height: 50px;
+    width: 100px;
+    color: #fff;
+    cursor: pointer;
 }
 
 /* extension */
@@ -119,6 +137,13 @@ input::file-selector-button:hover {
     margin: 0 auto;
     margin-right: 5px;
 }
+.logo-container .extension button {
+    width: 120px;
+    border-radius: 6px;
+    border: none;
+    color: #fff;
+    height: 25px;
+}
 
 .logo-container .logobar {
     display: flex;
@@ -133,15 +158,14 @@ input::file-selector-button:hover {
     display: flex;
 }
 
-.logo-container .searchbar {
+.searchbar {
     display: flex;
-    padding-left: 10px;
 }
-.logo-container .searchbar .fastsearch {
+.searchbar .fastsearch {
     margin: auto 0;
-    padding-left: 14px;
+    padding-right: 14px;
 }
-.logo-container .searchbar .fastsearch select {
+.searchbar .fastsearch select {
     width: 120px;
     border: 1px solid #8f8f8f;
     border-radius: 6px;
@@ -169,18 +193,6 @@ input::file-selector-button:hover {
 
 .searchbar_mobile {
     display: none;
-}
-
-.logo-container .extension button {
-    width: 120px;
-    border-radius: 6px;
-    margin-left: 10px;
-    border: none;
-    color: #fff;
-    height: 25px;
-}
-.logo-container .extension button image {
-    margin-right: 6px;
 }
 
 .container {
@@ -370,65 +382,17 @@ ul.list_sidebar li:hover {
 .news_des .user p {
     margin-left: 5px;
 }
+.news_des .user p:hover {
+    text-decoration: underline;
+    color: rgb(51, 94, 205);
+    cursor: pointer;
+}
 .news_des .core_info {
     display: flex;
     flex-direction: row;
 }
 .news_des .core_info p {
     margin-right: 10px;
-}
-
-/* popup window */
-.overlay {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: rgba(0, 0, 0, 0.7);
-    visibility: hidden;
-    opacity: 0;
-}
-.overlay:target {
-    visibility: visible;
-    opacity: 1;
-}
-
-.popup {
-    margin: 70px auto;
-    padding: 20px;
-    background: #fff;
-    border-radius: 5px;
-    width: 50%;
-    position: relative;
-}
-
-.popup h2 {
-    margin-top: 0;
-    color: #333;
-    font-family: Tahoma, Arial, sans-serif;
-    padding: 5px;
-}
-
-.popup p {
-    padding: 5px;
-}
-
-.popup .close {
-    position: absolute;
-    top: 20px;
-    right: 30px;
-    font-size: 30px;
-    font-weight: bold;
-    text-decoration: none;
-    color: #333;
-}
-.popup .close:hover {
-    color: #06d85f;
-}
-.popup .content {
-    max-height: 50%;
-    overflow: auto;
 }
 
 .footer {
@@ -663,19 +627,12 @@ ul.list_sidebar li:hover {
 /* mobile adjust */
 
 @media screen and (max-width: 768px) {
-    .toggle_searchbar {
-        display: none;
-    }
-    .topnav {
-        display: none;
-    }
-    .sidebar {
-        display: none;
-    }
-    .slogan-container {
-        display: none;
-    }
-    .overall .blank {
+    .toggle_searchbar,
+    .topnav,
+    .sidebar,
+    .slogan-container,
+    .overall .blank,
+    .container .top-news {
         display: none;
     }
 
@@ -695,9 +652,7 @@ ul.list_sidebar li:hover {
         display: none;
         padding: 0;
     }
-    .container .top-news {
-        display: none;
-    }
+
     .container .big-logo img {
         padding: 0;
         width: 100%;
@@ -708,16 +663,10 @@ ul.list_sidebar li:hover {
         padding: 0;
     }
 
-    .info {
-        width: 100%;
-    }
-    .news_container {
-        width: 100%;
-    }
-    .emailform {
-        width: 100%;
-    }
+    .info,
+    .news_container,
+    .emailform,
     .formContainer input {
-        width: 95%;
+        width: 100%;
     }
 }

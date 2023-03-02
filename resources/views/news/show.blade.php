@@ -4,7 +4,7 @@
             <div class="main">
                 <div class="detail-img">
                     <img src="{{$new->images ? asset('storage/'. $new->images) : asset('/images/no_image.jpg')}}"
-                        alt="">
+                        alt="new-image-holder">
                 </div>
                 <div class="detail-info ">
                     <h3>
@@ -13,11 +13,20 @@
                     <p><strong style="color:red; font-size:18px;">{{$new->price . $new->price_unit}}</strong></p>
                     <hr color="#000" size="1" width="100%">
                     <p><strong>Diện tích: </strong>{{$new->area}} {{$new->area_unit}}</p>
+                    @if(isset($new->num_wc_rooms))
                     <p><strong>Số phòng vệ sinh: </strong>{{$new->num_wc_rooms}}</p>
+                    @endif
+
+                    @if(isset($new->num_wc_rooms))
                     <p><strong>Số phòng ngủ: </strong>{{$new->num_bed_rooms}}</p>
+                    @endif
+
+                    <p><strong>Địa chỉ: </strong>{{$new->province->full_name}} . {{$new->district->full_name}}.
+                        {{$new->ward->full_name}}</p>
 
                     <hr color="#000" size="1" width="100%">
                     <p><strong>Mã tin: </strong>{{$new->id}}</p>
+                    <p><strong>Ngày đăng: </strong> {{now()->diffInMinutes($new->updated_at)}} phút trước </p>
                     <hr color="#000" size="1" width="100%">
                     <div class="warning">
                         <a><i class="fa fa-share-alt" aria-hidden="true"></i> Chia sẻ</a>
@@ -31,8 +40,8 @@
                         <i class="fa fa-user-circle-o" aria-hidden="true"></i>
                         <p>Người đăng: {{$new->user->name}}</p>
                     </div>
-                    <button>email</button>
-                    <button>number</button>
+                    <button>{{$new->user->email}}</button>
+                    <button>{{$new->user->phonenumber}}</button>
                     <div class="fast-contact">
                         <a href=""> <i class="fa fa-paper-plane" aria-hidden="true"></i> trả giá</a>
                         <a href=""> <i class="fa fa-paper-plane" aria-hidden="true"></i> liên hệ</a>

@@ -2,10 +2,15 @@
 <html>
 
 <head>
+    <meta name="keywords" content="HTML, CSS, JavaScript">
+    <meta name="author" content="Bruce Luu">
+
     <title>Admin Auth</title>
     <link rel="stylesheet" type="text/css" href="/css/admin/admin.css">
     <script src="https://kit.fontawesome.com/9ec7ede347.js" crossorigin="anonymous"></script>
     <script src="https://cdn.ckeditor.com/ckeditor5/35.3.2/classic/ckeditor.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 </head>
 
 <body>
@@ -13,7 +18,7 @@
         <div class="dashboard_sidebar" id="dashboard_sidebar">
             <h3 class="dashboard_logo" id="dashboard_logo">COOL</h3>
             <div class="dashboard_sidebar_user">
-                <img src="/images/admin/cute-chicken.jpg" alt="UserImages." id="userImage" />
+                <img src="/images/admin/cute-chicken.jpg" alt="UserImages" id="userImage" />
                 <span class="menuText">
                     <p>Welcome</p>
                     <p>
@@ -74,88 +79,24 @@
         </div>
     </div>
 
+    <script type="text/javascript" src="{{ asset('js/search.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/admin-side-bar.js') }}"></script>
+
     <script>
-        window.onresize = onWindowSize;
-
-        var sidebarIsOpen = true;
-
-        toggleBtn.addEventListener('click', (event) => {
-            event.preventDefault();
-            if (sidebarIsOpen) {
-                dashboard_sidebar.style.width = '10%';
-                dashboard_sidebar.style.transition = '0.3s all';
-                dashboard_content_container.style.width = '90%';
-                dashboard_logo.style.fontSize = '60px';
-                userImage.style.width = '60px';
-
-                menuIcons = document.getElementsByClassName('menuText');
-                for (var i = 0; i < menuIcons.length; i++) {
-                    menuIcons[i].style.display = 'none';
-                }
-
-                document.getElementsByClassName('dashboard_menu_lists')[0].style.textAlign = 'center';
-                sidebarIsOpen = false;
-            } else {
-                dashboard_sidebar.style.width = '20%';
-                dashboard_content_container.style.width = '80%';
-                dashboard_logo.style.fontSize = '80px';
-                userImage.style.width = '80px';
-
-                menuIcons = document.getElementsByClassName('menuText');
-                for (var i = 0; i < menuIcons.length; i++) {
-                    menuIcons[i].style.display = 'inline-block';
-                }
-
-                document.getElementsByClassName('dashboard_menu_lists')[0].style.textAlign = 'left';
-                sidebarIsOpen = true;
-            }
-        });
-
-        function onWindowSize() {
-            if(window.innerWidth<1920) {
-                dashboard_sidebar.style.width = '10%';
-                dashboard_sidebar.style.transition = '0.3s all';
-                dashboard_content_container.style.width = '90%';
-                dashboard_logo.style.fontSize = '60px';
-                userImage.style.width = '60px';
-
-                menuIcons = document.getElementsByClassName('menuText');
-                for (var i = 0; i < menuIcons.length; i++) {
-                    menuIcons[i].style.display = 'none';
-                }
-
-                document.getElementsByClassName('dashboard_menu_lists')[0].style.textAlign = 'center';
-                sidebarIsOpen = false;
-            }else {
-                dashboard_sidebar.style.width = '20%';
-                dashboard_content_container.style.width = '80%';
-                dashboard_logo.style.fontSize = '80px';
-                userImage.style.width = '80px';
-
-                menuIcons = document.getElementsByClassName('menuText');
-                for (var i = 0; i < menuIcons.length; i++) {
-                    menuIcons[i].style.display = 'inline-block';
-                }
-
-                document.getElementsByClassName('dashboard_menu_lists')[0].style.textAlign = 'left';
-                sidebarIsOpen = true;
-            }
-        }
-
         // CK editor scripts
         ClassicEditor
-        .create(document.querySelector('#editorAdmin'),{
-            ckfinder:{
+            .create(document.querySelector('#editorAdmin'),{
+                ckfinder:{
                 openerMethod: 'popup',
                 uploadUrl: '{{route('ckeditor.upload.admin').'?_token='.csrf_token()}}'
-            }
-        })
-        .then(editor => {
+                }
+            })
+            .then(editor => {
             console.log(editor);
-        })
-        .catch( error => {
+            })
+            .catch( error => {
             console.error(error);
-        });
+            });
     </script>
 </body>
 

@@ -59,7 +59,7 @@ class DatabaseSeeder extends Seeder
             'invester_id' => $invester->id,
         ]);
 
-        Category::create(
+        Category::insert([
             [
                 'purpose' => 'Bán',
                 'type' => 'Nhà',
@@ -116,9 +116,9 @@ class DatabaseSeeder extends Seeder
                 'type_name' => 'Nhà riêng'
             ]
 
-        );
+        ]);
 
-        News::create(
+        News::insert([
             [
                 "user_id" => 1,
                 "category_id" => 2,
@@ -261,6 +261,6 @@ class DatabaseSeeder extends Seeder
                 "images" => "news_images/admin-user-1672299285.jpg",
             ]
 
-        );
+        ]);
     }
 }

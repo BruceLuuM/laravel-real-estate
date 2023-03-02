@@ -55,12 +55,14 @@
                             <div class="base">
                                 <label for="price">Giá</label>
                                 <div class="base_options">
-                                    <input placeholder="..." type="text" name="price" value="{{old('price')}}">
+                                    <input placeholder="..." type="text" name="price" value="{{old('price')}}"
+                                        id="price">
                                     @error('price')
                                     <p class="error">{{$message}}</p>
                                     @enderror
-                                    <select name="price_unit">
-                                        <option value="" disabled selected>Đơn vị</option>
+                                    <select name="price_unit" id="price_unit">
+                                        <option value="0" disabled selected>Đơn vị</option>
+                                        <option value="" disabled hidden>Thỏa Thuận</option>
                                         <option value="tỉ" @if (old('price_unit')=='tỉ' ) {{'selected'}} @endif>tỉ
                                         </option>
                                         <option value="nghìn tỉ" @if (old('price_unit')=='nghìn tỉ' ) {{'selected'}}
@@ -76,11 +78,12 @@
                                 <label>Địa chỉ</label>
                                 <div class="base_options">
                                     <div style="width:100%">
-                                        <select name="province_id" onchange="address_adjust()">
-                                            <option value="" disabled selected>Thành phố</option>
+                                        <select name="province_id" id="province_id">
+                                            <option value="" disabled selected>Tỉnh/Thành phố</option>
                                             @foreach($provinces as $province)
-                                            <option value="{{$province->code}}" {{(old('province_id')==$province->code)
-                                                ? 'selected':''}}>{{$province->name}}</option>
+                                            <option value=" {{$province->code}}" {{(old('province_id')==$province->code)
+                                                ?
+                                                'selected':''}}>{{$province->name}}</option>
                                             @endforeach
                                         </select>
                                         @error('province_id')
@@ -89,12 +92,14 @@
                                     </div>
 
                                     <div style="width:100%">
-                                        <select name="district_id">
-                                            <option value="" disabled selected>Quận/huyện</option>
+                                        <select name="district_id" id="district_id">
+                                            <option value="" disabled selected>Quận/Huyện</option>
+                                            @if (isset($districts))
                                             @foreach($districts as $distric)
                                             <option value="{{$distric->code}}" {{(old('district_id')==$distric->code) ?
                                                 'selected':''}}>{{$distric->name}}</option>
                                             @endforeach
+                                            @endif
                                         </select>
                                         @error('district_id')
                                         <p class="error">{{$message}}</p>
@@ -102,12 +107,14 @@
                                     </div>
 
                                     <div style="width:100%">
-                                        <select name="ward_id">
-                                            <option value="0" disabled selected>Xã</option>
+                                        <select name="ward_id" id="ward_id">
+                                            <option value="0" disabled selected>Xã/Phường/Thị trấn</option>
+                                            @if (isset($wards))
                                             @foreach($wards as $ward)
                                             <option value="{{$ward->code}}" {{(old('ward_id')==$ward->code) ?
                                                 'selected':''}}>{{$ward->name}}</option>
                                             @endforeach
+                                            @endif
                                         </select>
                                         @error('ward_id')
                                         <p class="error">{{$message}}</p>
@@ -194,12 +201,27 @@
                         <div class="base">
                             <label for="capcha">Mã capcha</label>
                         </div>
-                        <button
-                            style="background-color:#285ea6; border: 2px solid #fff; border-radius:7px; height:50px; width:100px; color: #fff; cursor:pointer">Đăng
-                            tin</button>
+                        <button class="post_new_button">Đăng tin</button>
                     </div>
                 </form>
             </div>
         </div>
     </x-card>
 </x-layout>
+
+<script type="text/javascript">
+    // CK editor scripts
+    ClassicEditor
+    .create(document.querySelector('#editorUser'), {
+        ckfinder:{
+            openerMethod: 'popup',
+            uploadUrl: '{{route('ckeditor.upload.user').'?_token='.csrf_token()}}'
+        }
+    })
+    .then(editor => {
+        console.log(editor);
+    })
+    .catch( error => {
+        console.error(error);
+    });
+</script>

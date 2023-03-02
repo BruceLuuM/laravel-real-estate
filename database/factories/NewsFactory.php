@@ -19,10 +19,10 @@ class NewsFactory extends Factory
     {
         return [
             'user_id' => '0',
-            'category_id' => '0',
-            'ward_id' => '0',
-            'district_id' => '0',
-            'province_id' => '0',
+            'category_id' => '1',
+            'ward_id' => '1',
+            'district_id' => '1',
+            'province_id' => '1',
             'address' => 'test address',
             'area' => $this->faker->numberBetween(10, 200),
             'area_unit' => $this->faker->randomElement(['m^2', 'km^2', 'ha']),

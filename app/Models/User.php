@@ -50,7 +50,7 @@ class User extends Authenticatable
     protected function type(): Attribute
     {
         return Attribute::make(
-            get: fn ($value) =>  ["user", "admin"][$value],
+            get: fn ($value) =>  ["user", "VIP"][$value],
         );
     }
 

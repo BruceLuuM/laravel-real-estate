@@ -66,8 +66,8 @@ class UsersController extends Controller
 
         if (auth()->attempt($formFields)) {
             $request->session()->regenerate();
-            if (auth()->user()->type == 'admin') {
-                return redirect('/admin');
+            if (auth()->user()->type == 'VIP') {
+                return redirect('/');
             }
             return redirect('/');
         }

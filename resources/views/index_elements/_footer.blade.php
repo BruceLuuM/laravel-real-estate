@@ -1,6 +1,7 @@
 <div class="footer">
     <div class="overall">
-        <img class="main-logo" src="" alt="" width="200px" height="200px">
+        <img class="main-logo" src="https://i3.ytimg.com/vi/KRvFvll_ykE/maxresdefault.jpg" alt="company-logo"
+            width="200px" height="200px">
         <div class="more-info">
             <h4>BATDONGSAN.VN</h4>
             <p>Batdongsan.vn là Website thuộc sở hữu của Công ty Cổ phần Đầu tư Tiếp thị Bất động sản Việt Nam

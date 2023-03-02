@@ -15,7 +15,25 @@ class AdminManageUsersController extends Controller
             'users' => User::latest()->filter(request(['search']))->paginate(5),
         ]);
     }
+    public function index_LTE()
+    {
+        return view('adminLTE.manage_users.manage', [
+            'users' => User::all(),
+        ]);
+    }
 
+    public function show(User $user)
+    {
+        return view('adminLTE.manage_users.show', [
+            'user' => $user,
+        ]);
+    }
+
+    //show create
+    public function create()
+    {
+        return view('adminLTE.manage_users.create');
+    }
 
     // create a new user
     public function store(Request $request)
@@ -25,6 +43,7 @@ class AdminManageUsersController extends Controller
             'email' => ['required', 'email'],
             'phonenumber' => ['required', 'regex:/^([0-9\s\-\+\(\)]*)$/', 'min:10', Rule::unique('users', 'phonenumber')],
             'password' => ['required', 'min:6'],
+            'type' => ['nullable']
         ]);
 
         // Hash password
@@ -32,8 +51,15 @@ class AdminManageUsersController extends Controller
 
         //Create user
         User::create($formFields);
+        return redirect()->route('adminManageUser');
+    }
 
-        return redirect()->route('adminManageUsers');
+    //edit form
+    public function edit(User $user)
+    {
+        return view('adminLTE.manage_users.edit', [
+            'user' => $user,
+        ]);
     }
 
     //update form
@@ -43,18 +69,24 @@ class AdminManageUsersController extends Controller
             'name' => 'required',
             'email' => 'required',
             'phonenumber' => 'required',
-            'password' => 'required',
+            'password' => 'nullable',
         ]);
+
+        if ($request->password == null) {
+            $formFields['password'] = $request->oldPassword;
+        } else {
+            $formFields['password'] = bcrypt($formFields['password']);
+        }
 
         $user->update($formFields);
         $user->touch();
-        return redirect()->route('adminManageUsers');
+        return redirect()->route('adminManageUser');
     }
 
     //destroy
     public function destroy(User $user)
     {
         $user->delete();
-        return redirect()->route('adminManageUsers');
+        return redirect()->route('adminManageUser');
     }
 }

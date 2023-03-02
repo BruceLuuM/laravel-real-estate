@@ -61,12 +61,14 @@
                             <div class="base">
                                 <label for="price">Giá</label>
                                 <div class="base_options">
-                                    <input placeholder="..." type="text" name="price" value="{{$new->price}}">
+                                    <input placeholder="..." type="text" name="price" value="{{$new->price}}"
+                                        id="price">
                                     @error('price')
                                     <p class="error">{{$message}}</p>
                                     @enderror
-                                    <select name="price_unit">
+                                    <select name="price_unit" id="price_unit">
                                         <option value="0" disabled selected>Đơn vị</option>
+                                        <option value="" disabled hidden>Thỏa thuận</option>
                                         <option value="tỉ" @if ($new->price_unit == 'tỉ') {{'selected'}} @endif>tỉ
                                         </option>
                                         <option value="nghìn tỉ" @if ($new->price_unit == 'nghìn tỉ') {{'selected'}}
@@ -78,11 +80,12 @@
                                     @enderror
                                 </div>
                             </div>
+
                             <div class="base">
                                 <label>Địa chỉ</label>
                                 <div class="base_options">
                                     <div style="width:100%">
-                                        <select name="province_id">
+                                        <select name="province_id" id="province_id">
                                             <option value="0" disabled selected>Thành phố</option>
                                             @foreach($provinces as $province)
                                             <option value="{{$province->code}}" {{($new->province_id == $province->code)
@@ -95,12 +98,14 @@
                                     </div>
 
                                     <div style="width:100%">
-                                        <select name="district_id">
+                                        <select name="district_id" id="district_id">
                                             <option value="0" disabled selected>Quận/huyện</option>
+                                            @if (isset($districts))
                                             @foreach($districts as $distric)
                                             <option value="{{$distric->code}}" {{($new->district_id == $distric->code) ?
                                                 'selected':''}}>{{$distric->name}}</option>
                                             @endforeach
+                                            @endif
                                         </select>
                                         @error('district_id')
                                         <p class="error">{{$message}}</p>
@@ -108,12 +113,14 @@
                                     </div>
 
                                     <div style="width:100%">
-                                        <select name="ward_id">
+                                        <select name="ward_id" id="ward_id">
                                             <option value="0" disabled selected>Xã</option>
+                                            @if (isset($districts))
                                             @foreach($wards as $ward)
                                             <option value="{{$ward->code}}" {{($new->ward_id == $ward->code) ?
                                                 'selected':''}}>{{$ward->name}}</option>
                                             @endforeach
+                                            @endif
                                         </select>
                                         @error('ward_id')
                                         <p class="error">{{$message}}</p>
@@ -157,7 +164,7 @@
                                 <p class="error">{{$message}}</p>
                                 @enderror
                                 <img src="{{$new->images ? asset('storage/'. $new->images) : asset('/images/no_image.jpg')}}"
-                                    alt="">
+                                    alt="new-image-holder">
 
                             </div>
                             <div class="base">
@@ -202,12 +209,27 @@
                         <div class="base">
                             <label for="capcha">Mã capcha</label>
                         </div>
-                        <button
-                            style="background-color:#285ea6; border: 2px solid #fff; border-radius:7px; height:50px; width:100px; color: #fff; cursor:pointer">Cập
-                            nhật</button>
+                        <button class="post_new_button">Cập nhật</button>
                     </div>
                 </form>
             </div>
         </div>
     </x-card>
 </x-layout>
+
+<script type="text/javascript">
+    // CK editor scripts
+    ClassicEditor
+    .create(document.querySelector('#editorUser'), {
+        ckfinder:{
+            openerMethod: 'popup',
+            uploadUrl: '{{route('ckeditor.upload.user').'?_token='.csrf_token()}}'
+        }
+    })
+    .then(editor => {
+        console.log(editor);
+    })
+    .catch( error => {
+        console.error(error);
+    });
+</script>

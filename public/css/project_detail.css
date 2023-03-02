@@ -126,6 +126,8 @@
 }
 .user-contact .fast-contact a {
     display: flex;
+    justify-content: space-around;
+    align-items: baseline;
     width: 40%;
     padding: 5px;
     font-weight: bold;
@@ -146,7 +148,7 @@
     .Detail_project,
     .detail-project-img img,
     .detail-info,
-    .detail-info,
+    .user-contact,
     .inLogo_container,
     .Diff_project {
         width: 100%;

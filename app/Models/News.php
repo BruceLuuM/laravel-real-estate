@@ -17,7 +17,9 @@ class News extends Model
     {
         if ($filters['search'] ?? false) {
             $query->where('news_header', 'like', '%' . request('search') . '%')
-                ->orwhere('description', 'like', '%' . request('search') . '%');
+                ->orwhere('province_id', 'like', '%' . request('province_id') . '%');
+            // ->orwhere('district_id', 'like', '%' . request('district_id') . '%')
+            // ->orwhere('ward_id', 'like', '%' . request('ward_id') . '%');
         }
     }
 

@@ -8,7 +8,7 @@
             <p>No category found</p>
             @else
             @foreach($categories as $category)
-            <li><a href="">{{$category['type']}}</a></li>
+            <li><a href="">{{$category->type}}</a></li>
             @endforeach
             @endif
         </ul>
@@ -25,7 +25,7 @@
             <li class="invester_container">
                 <a href="{{route('showInvester',['invester'=>$invester->slug])}}" alt="">
                     <img src="{{$invester->invester_logo ? asset('storage/'. $invester->invester_logo) : asset('/images/no_image.jpg')}}"
-                        alt="">
+                        alt="invester-logo-placeholder">
                 </a>
                 <a href="{{route('showInvester',['invester'=>$invester->slug])}}" class="invester_name_container">
                     <strong>{{$invester->name}}</strong>

@@ -23,7 +23,9 @@
                 </div>
 
                 <div class="user-form">
-                    <span>THÔNG TIN ĐĂNG KÝ TÀI KHOẢN</span>
+                    <h3>
+                        <span>THÔNG TIN ĐĂNG KÝ TÀI KHOẢN</span>
+                    </h3>
                     <form action="{{route('storeUser');}}" method="post">
                         @csrf
                         <div class=" InputContainer">

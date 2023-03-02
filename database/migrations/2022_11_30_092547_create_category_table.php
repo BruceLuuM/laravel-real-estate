@@ -15,10 +15,10 @@ return new class extends Migration
     {
         Schema::create('category', function (Blueprint $table) {
             $table->id();
-            $table->string('purpose');
-            $table->string('type');
-            $table->string('type_name');
-            $table->string('slug');
+            $table->string('purpose')->default('invalid');
+            $table->string('type')->default('invalid');;
+            $table->string('type_name')->default('invalid');;
+            $table->string('slug')->default('invalid');;
             $table->mediumText('description');
             $table->timestamps();
         });

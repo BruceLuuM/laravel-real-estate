@@ -3,8 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\News;
-use App\Models\Wards;
-use App\Models\Districts;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -24,10 +22,7 @@ class AdminManageNewsController extends Controller
     //show create form
     public function create()
     {
-        return view('admin.manage_news.create', [
-            'districts' => Districts::all(),
-            'wards' => Wards::all(),
-        ]);
+        return view('admin.manage_news.create');
     }
 
     //store new data
@@ -42,13 +37,13 @@ class AdminManageNewsController extends Controller
             'area' => 'required',
             'area_unit' => 'required',
             'price' => 'required',
-            'price_unit' => 'required',
+            'price_unit' => 'nullable',
             'news_header' => 'required',
             'description' => 'required',
             'attribute' => 'required',
-            'num_bed_rooms' => 'required',
-            'num_wc_rooms' => 'required',
-            'law_related_info' => 'required',
+            'num_bed_rooms' => 'nullable',
+            'num_wc_rooms' => 'nullable',
+            'law_related_info' => 'nullable',
         ]);
 
         if ($request->hasFile('images')) {
@@ -68,8 +63,6 @@ class AdminManageNewsController extends Controller
     {
         return view('admin.manage_news.edit', [
             'new' => $new,
-            'districts' => Districts::all(),
-            'wards' => Wards::all(),
         ]);
     }
 
@@ -84,13 +77,13 @@ class AdminManageNewsController extends Controller
             'area' => 'required',
             'area_unit' => 'required',
             'price' => 'required',
-            'price_unit' => 'required',
+            'price_unit' => 'nullable',
             'news_header' => 'required',
             'description' => 'required',
             'attribute' => 'required',
-            'num_bed_rooms' => 'required',
-            'num_wc_rooms' => 'required',
-            'law_related_info' => 'required',
+            'num_bed_rooms' => 'nullable',
+            'num_wc_rooms' => 'nullable',
+            'law_related_info' => 'nullable',
         ]);
 
         if ($request->hasFile('images')) {

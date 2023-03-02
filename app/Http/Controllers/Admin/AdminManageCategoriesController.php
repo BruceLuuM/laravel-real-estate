@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Models\Category;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class AdminManageCategoriesController extends Controller
 {
@@ -16,6 +17,26 @@ class AdminManageCategoriesController extends Controller
 
         ]);
     }
+    public function index_LTE()
+    {
+        return view('adminLTE.manage_categories.manage', [
+            'categories' => Category::all(),
+
+        ]);
+    }
+
+    public function show(Category $category)
+    {
+        return view('adminLTE.manage_categories.show', [
+            'category' => $category,
+        ]);
+    }
+
+    //show create
+    public function create()
+    {
+        return view('adminLTE.manage_categories.create');
+    }
 
     // create a new category
     public function store(Request $request)
@@ -24,12 +45,20 @@ class AdminManageCategoriesController extends Controller
             'purpose' => ['required'],
             'type' => ['required'],
             'type_name' => ['required'],
+            'description' => ['nullable'],
         ]);
-
+        $formFields['slug'] = Str::slug($request->type_name);
         //Create category
         Category::create($formFields);
+        return redirect()->route('adminManageCategory');
+    }
 
-        return back();
+    //edit form
+    public function edit(Category $category)
+    {
+        return view('adminLTE.manage_categories.edit', [
+            'category' => $category,
+        ]);
     }
 
     //update form
@@ -43,9 +72,8 @@ class AdminManageCategoriesController extends Controller
 
         $category->update($formFields);
         $category->touch();
-        return back();
+        return redirect()->route('adminManageCategory');
     }
-
 
     //destroy
     public function destroy(Category $category)

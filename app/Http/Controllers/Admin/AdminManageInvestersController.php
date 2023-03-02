@@ -17,12 +17,24 @@ class AdminManageInvestersController extends Controller
         ]);
     }
 
+    public function index_LTE()
+    {
+        return view('adminLTE.manage_investers.manage', [
+            'investers' => Invester::all(),
+        ]);
+    }
+
+    public function show(Invester $invester)
+    {
+        return view('adminLTE.manage_investers.show', [
+            'invester' => $invester,
+        ]);
+    }
+
     //show create
     public function create()
     {
-        return view('admin.manage_investers.create', [
-            'investers' => Invester::latest()->paginate(5),
-        ]);
+        return view('adminLTE.manage_investers.create', []);
     }
 
     // create/store a new invester
@@ -52,8 +64,6 @@ class AdminManageInvestersController extends Controller
     {
         return view('admin.manage_investers.edit', [
             'invester' => $invester,
-            // 'districts' => Districts::all(),
-            // 'wards' => Wards::all(),
         ]);
     }
 

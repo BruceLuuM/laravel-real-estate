@@ -5,12 +5,15 @@
                 <div class="main">
                     <div class="detail-project-img">
                         <img src="{{$project->images ? asset('storage/'. $project->images) : asset('/images/no_image.jpg')}}"
-                            alt="">
+                            alt="project-img-holder">
                     </div>
                     <div class="detail-project-info ">
-                        <span>
-                            {{$project->name}}
-                        </span>
+                        <h3>
+                            <span>
+                                {{$project->name}}
+                            </span>
+                        </h3>
+
                         <p>
                             {{$project->ward->full_name}}, {{$project->district->full_name}},
                             {{$project->province->full_name}}
@@ -34,11 +37,13 @@
                             <a><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Báo xấu</a>
                             <a><i class="fa fa-heart-o" aria-hidden="true"></i> Lưu tin</a>
                         </div>
-                        <span>Chủ đầu tư:</span>
+                        <h3>
+                            <span>Chủ đầu tư:</span>
+                        </h3>
                         <div class="invester_container_project">
                             <a href="{{route('showInvester',['invester'=>$project->invester->slug])}}">
                                 <img src="{{$project->invester->invester_logo ? asset('storage/'. $project->invester->invester_logo) : asset('/images/no_image.jpg')}}"
-                                    alt="">
+                                    alt="image-project-holder">
                             </a>
                             <a href="{{route('showInvester',['invester'=>$project->invester->slug])}}"
                                 class="invester_name_container">
@@ -73,19 +78,19 @@
                     <h3>
                         <span>DỰ ÁN CÙNG KHU VỰC</span>
                     </h3>
-                    <x-projects.list-ahead-projects :projects="$projects" />
+                    <x-projects.list-ahead-projects :projects="$projects_province_related" />
                 </div>
                 <div class="inLogo_container" style="">
                     <h3>
                         <span>ĐÁNH GIÁ</span>
                     </h3>
-                    <x-projects.list-ahead-projects :projects="$projects" />
+                    <x-projects.list-ahead-projects :projects="$projects_province_related" />
                 </div>
                 <div class="inLogo_container" style="">
                     <h3>
                         <span>NỘI DUNG ĐÁNH GIÁ</span>
                     </h3>
-                    <x-projects.list-ahead-projects :projects="$projects" />
+                    <x-projects.list-ahead-projects :projects="$projects_province_related" />
                 </div>
             </div>
         </div>

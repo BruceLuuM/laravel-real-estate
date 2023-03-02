@@ -18,7 +18,6 @@ class Invester extends Model
         'description',
         'nums_project',
         'invester_logo',
-
     ];
 
     public function project()

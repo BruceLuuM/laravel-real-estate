@@ -21,7 +21,7 @@ class ProjectController extends Controller
         return view('project.show', [
             'project' => $project,
             'investers' => Invester::latest()->paginate(5),
-            'projects' => Project::latest()
+            'projects_province_related' => Project::latest()
                 ->paginate(10)
                 ->where('province_id', '=', $project->province_id),
         ]);
