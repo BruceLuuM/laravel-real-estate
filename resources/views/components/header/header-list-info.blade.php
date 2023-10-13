@@ -1,8 +1,8 @@
 <div class="dropdown">
-    <button><a href="/">MUA BÁN <i class="fa fa-chevron-down" aria-hidden="true"></i></a></button>
+    <button><a href="">MUA BÁN <i class="fa fa-chevron-down" aria-hidden="true"></i></a></button>
     <div class="options_dropdown">
         @foreach($categories as $category)
-        <a>Bán {{$category->type}}</a>
+        <a href="/search_news?category_id={{$category->id}}">Bán {{$category->type}}</a>
         @endforeach
     </div>
 </div>
@@ -10,12 +10,13 @@
     <button><a href="/">CHO THUÊ <i class="fa fa-chevron-down" aria-hidden="true"></i></a></button>
     <div class="options_dropdown">
         @foreach($categories as $category)
-        <a>Cho thuê {{$category->type}}</a>
+        <a href="/search_news?category_id={{$category->id}}">Cho thuê {{$category->type}}</a>
         @endforeach
     </div>
 </div>
 <div class="dropdown">
-    <button><a href="/">KẾT NỐI <i class="fa fa-chevron-down" aria-hidden="true"></i></a></button>
+    <button><a href="{{Route('showAllBlog')}}">KẾT NỐI <i class="fa fa-chevron-down"
+                aria-hidden="true"></i></a></button>
     <div class="options_dropdown">
         <a href="/" alt="choose">Dự án</a>
         <a href="/" alt="choose">Liên minh</a>
@@ -25,7 +26,8 @@
     </div>
 </div>
 <div class="dropdown">
-    <button><a href="/">TIN TỨC <i class="fa fa-chevron-down" aria-hidden="true"></i></a></button>
+    <button><a href="{{Route('showAllBlog')}}">TIN TỨC <i class="fa fa-chevron-down"
+                aria-hidden="true"></i></a></button>
     <div class="options_dropdown">
         <a href="/" alt="choose">Nhìn ra thế giới</a>
         <a href="/" alt="choose">Chuyển động thị trường</a>
@@ -38,7 +40,8 @@
     </div>
 </div>
 <div class="dropdown">
-    <button><a href="/">SỰ KIỆN <i class="fa fa-chevron-down" aria-hidden="true"></i></a></button>
+    <button><a href="{{Route('showAllBlog')}}">SỰ KIỆN <i class="fa fa-chevron-down"
+                aria-hidden="true"></i></a></button>
     <div class="options_dropdown">
         <a href="/" alt="choose">Sự kiện ra mắt</a>
         <a href="/" alt="choose">Sự kiện hội thảo</a>
@@ -48,7 +51,8 @@
     </div>
 </div>
 <div class="dropdown">
-    <button><a href="/">CHUYÊN ĐỀ <i class="fa fa-chevron-down" aria-hidden="true"></i></a></button>
+    <button><a href="{{Route('showAllBlog')}}">CHUYÊN ĐỀ <i class="fa fa-chevron-down"
+                aria-hidden="true"></i></a></button>
     <div class="options_dropdown">
         <a href="/" alt="choose">Bất động sản số</a>
         <a href="/" alt="choose">Hệ sinh thái bất động sản</a>
@@ -59,7 +63,8 @@
     </div>
 </div>
 <div class="dropdown">
-    <button><a href="/">THƯ VIỆN <i class="fa fa-chevron-down" aria-hidden="true"></i></a></button>
+    <button><a href="{{Route('showAllBlog')}}">THƯ VIỆN <i class="fa fa-chevron-down"
+                aria-hidden="true"></i></a></button>
     <div class="options_dropdown">
         <a href="/" alt="choose">Nội thất</a>
         <a href="/" alt="choose">Kiến trúc</a>

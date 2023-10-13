@@ -1,6 +1,6 @@
 @extends('adminLTE.layout.master')
-@section('title','Admin User Management')
-@section('UsersManagement','active')
+@section('title','Admin Admin Management')
+@section('AdminsManagement','active')
 
 @section('page-level-style')
 <style type="text/css">
@@ -13,12 +13,12 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>User Edit</h1>
+                <h1>Admin Edit</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active">User Edit</li>
+                    <li class="breadcrumb-item active">Admin Edit</li>
                 </ol>
             </div>
         </div>
@@ -27,14 +27,14 @@
 
 <!-- Main content -->
 <section class="content">
-    <form action="{{route('adminUpdateUser',['user'=>$user->id])}}" method="post" id="UserCreateForm">
+    <form action="{{route('adminUpdateAdmin',['admin'=>$admin->id])}}" method="post" id="AdminCreateForm">
         @csrf
         @method('PUT')
         <div class=" row">
             <div class="col-md">
                 <div class="card card-primary">
                     <div class="card-header">
-                        <h3 class="card-title">Editting User ID: {{$user->id}}</h3>
+                        <h3 class="card-title">Editting Admin ID: {{$admin->id}}</h3>
                         <div class="card-tools">
                             <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
                                 <i class="fas fa-minus"></i>
@@ -45,12 +45,12 @@
                         <div class="form-group">
                             <label for="InputEmail1">Name</label>
                             <input type="text" name="name" class="form-control" id="InputName"
-                                placeholder="Enter a name..." value="{{$user->name}}">
+                                placeholder="Enter a name..." value="{{$admin->name}}">
                         </div>
                         <div class="form-group">
                             <label for="InputEmail1">Phone number</label>
                             <input type="tel" name="phonenumber" class="form-control" id="InputPhoneNumber"
-                                placeholder="Enter phone number" value="{{$user->phonenumber}}">
+                                placeholder="Enter phone number" value="{{$admin->phonenumber}}">
                         </div>
                         @error('phonenumber')
                         <p class="error"> {{$message}}</p>
@@ -59,15 +59,12 @@
                         <div class="form-group">
                             <label for="InputEmail">Email address</label>
                             <input type="email" name="email" class="form-control" id="InputEmai"
-                                placeholder="Enter email" value="{{$user->email}}">
+                                placeholder="Enter email" value="{{$admin->email}}">
                         </div>
                         <div class="form-group">
-                            <label for="type">Type</label>
+                            <label for="type">Role:</label>
                             <select name="type" class="form-control custom-select">
-                                <option value="user" @if ($user->type=='user') {{'selected'}} @endif>User
-                                </option>
-                                <option value="admin" @if ($user->type=='admin') {{'selected'}} @endif>
-                                    Admin
+                                <option value="admin" @if ($admin->type=='admin') {{'selected'}} @endif>Admin
                                 </option>
                             </select>
                             @error('purpose')
@@ -82,7 +79,7 @@
                         <div class="form-group">
                             <label>Old Password</label>
                             <input class="form-control" name="oldPassword" class="form-control"
-                                value="{{$user->password}}" readonly>
+                                value="{{$admin->password}}" readonly>
                         </div>
                     </div>
                     <!-- /.card -->
@@ -92,7 +89,7 @@
         </div>
         <div class="row">
             <div class="col-12">
-                <a href="{{route('adminManageUser')}}" class="btn btn-secondary">Cancel</a>
+                <a href="{{route('adminManageAdmin')}}" class="btn btn-secondary">Cancel</a>
                 <button type="commit" class="btn btn-success float-right"> Save changes</button>
             </div>
         </div>
@@ -100,7 +97,7 @@
 </section>
 @endsection
 
-@push('script_user_validate')
+@push('script_admin_validate')
 <script>
     $.validator.addMethod("validatePassword", function (value, element) {
             return this.optional(element) || /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,16}$/.test(value);
@@ -111,7 +108,7 @@
         }, "not correctly formatted (vietnam) phone number");
     
     $(function () {
-          $("#UserCreateForm").validate({
+          $("#AdminCreateForm").validate({
             rules: {
                 name: {
                     required: true,

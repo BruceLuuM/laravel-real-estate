@@ -69,7 +69,7 @@
                                         {{$index++}}
                                     </td>
                                     <td>
-                                        <i class=" fas fa-caret-right fa-fw mr-2"></i>{{$module->id}}
+                                        {{$module->id}}
                                     </td>
                                     <td>
                                         <div class="col-12">

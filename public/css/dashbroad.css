@@ -156,6 +156,7 @@ input::file-selector-button:hover {
 
 .toggle_searchbar {
     display: flex;
+    align-items: center;
 }
 
 .searchbar {

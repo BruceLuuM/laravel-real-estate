@@ -6,6 +6,7 @@ use App\Http\Controllers\UsersController;
 use App\Http\Controllers\EditorController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\InvesterController;
+use App\Http\Controllers\NewsBlogController;
 use App\Http\Controllers\LiveSearchController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\ModuleController;
@@ -90,6 +91,9 @@ Route::prefix('user')->middleware(['auth'])->group(function () {
     Route::post('/logout', [UsersController::class, 'logout'])->name('userLogout');
 });
 
+// search new
+Route::get('/search_news', [NewsController::class, 'search_news'])->name('search_news');
+
 // single new
 Route::get('/tin-tuc-{new:slug}', [NewsController::class, 'show'])->name('showNew');
 
@@ -113,6 +117,14 @@ Route::get('/du-an-{project:slug}', [ProjectController::class, 'show'])->name('s
 
 // single category
 Route::get('/category/{category:slug}', [CategoryController::class, 'show'])->name('showCategory');
+
+// NEWS BLOG
+
+// All Blog
+Route::get('/blog', [NewsBlogController::class, 'index'])->name('showAllBlog');
+
+// single blog
+Route::get('/blog-{news_blog:slug}', [NewsBlogController::class, 'show'])->name('showBlog');
 
 // ----------------------------------ADMIN----------------------------------
 
@@ -227,9 +239,9 @@ Route::post('/uploadAdmin', [EditorController::class, 'uploadImageAdmin'])->name
 Route::post('/uploadUser', [EditorController::class, 'uploadImageUser'])->name('ckeditor.upload.user');
 
 // ----------------------------------AJAX Live search----------------------------------
-Route::get('/search_news', [LiveSearchController::class, 'search_news'])->name('search_news');
 Route::get('/search_districts', [LiveSearchController::class, 'search_districts'])->name('search_districts');
 Route::get('/search_wards', [LiveSearchController::class, 'search_wards'])->name('search_wards');
+Route::get('/search_projects', [LiveSearchController::class, 'search_projects'])->name('search_projects');
 
 Route::get('/phonenumber_check', [LiveSearchController::class, 'phonenumber_check'])->name('phonenumber_check');
 

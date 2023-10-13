@@ -1,5 +1,5 @@
 @extends('adminLTE.layout.master')
-@section('title','Admin Category Management')
+@section('title','Admin Invester Management')
 @section('InvestersManagement','active')
 
 @section('page-level-style')
@@ -13,12 +13,12 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Category Edit</h1>
+                <h1>Invester Create</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active">Category Edit</li>
+                    <li class="breadcrumb-item active">Invester Create</li>
                 </ol>
             </div>
         </div>
@@ -27,13 +27,92 @@
 
 <!-- Main content -->
 <section class="content">
-    {{-- <form action="{{route('adminStoreCategory')}}" method="post"> --}}
+    <form action="{{route('adminStoreInvester')}}" method="post" enctype="multipart/form-data">
         @csrf
+        <div class=" row">
+            <div class="col-md">
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">Add a new invester</h3>
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="name">Invester name:</label>
+                            <input type="text" name="name" class="form-control" value="{{old('name')}}">
+                            @error('name')
+                            <p class=" error"> {{$message}} </p>
+                            @enderror
+                        </div>
+
+                        <div class="form-group">
+                            <label for="nums_project">Number of present project:</label>
+                            <input placeholder="..." type="text" name="nums_project" class="form-control"
+                                value="{{old('nums_project')}}">
+                            @error('nums_project')
+                            <p class="error">{{$message}}</p>
+                            @enderror
+                        </div>
+
+                        <div class="form-group">
+                            <label for="brief">Invester's brief:</label>
+                            <textarea name="brief" class="form-control">{{old('brief')}}</textarea>
+                            @error('brief')
+                            <p class="error">{{$message}}</p>
+                            @enderror
+                        </div>
+
+                        <div class="form-group">
+                            <label for="description">Invester's description:</label>
+                            <textarea name="description" id="editorAdmin"
+                                class="form-control">{{old('description')}}</textarea>
+                            @error('description')
+                            <p class="error">{{$message}}</p>
+                            @enderror
+                        </div>
+
+                        <div class="form-group">
+                            <label for="invester_logo">File input</label>
+                            <div class="input-group">
+                                <div class="custom-file">
+                                    <input type="file" name="invester_logo" class="custom-file-input"
+                                        id="invester_logo">
+                                    <label class="custom-file-label" for="invester_logo">Choose
+                                        file</label>
+                                </div>
+                                <div class="input-group-append">
+                                    <span class="input-group-text">Upload</span>
+                                </div>
+                                @error('invester_logo')
+                                <p class="error">{{$message}}</p>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+        </div>
+
         <div class="row">
+            <div class="col-12">
+                <a href="{{route('adminManageInvester')}}" class="btn btn-secondary">Cancel</a>
+                <button type="commit" class="btn btn-success float-right">Create</button>
+            </div>
+        </div>
+    </form>
+    {{-- <form action="{{route('adminStoreInvester')}}" method="post"> --}}
+        {{-- @csrf --}}
+        {{-- <div class="row">
             <div class="col-md-12">
                 <div class="card card-default">
                     <div class="card-header">
-                        <h3 class="card-title">bs-stepper</h3>
+                        <h3 class="card-title">"Other option"</h3>
                     </div>
                     <div class="card-body p-0">
                         <div class="bs-stepper">
@@ -97,13 +176,14 @@
                         Visit <a href="https://github.com/Johann-S/bs-stepper/#how-to-use-it">bs-stepper
                             documentation</a> for more examples and information about the plugin.
                     </div>
+
                 </div>
                 <!-- /.card -->
             </div>
-        </div>
+        </div> --}}
         {{-- <div class="row">
             <div class="col-12">
-                <a href="{{route('adminManageCategory')}}" class="btn btn-secondary">Cancel</a>
+                <a href="{{route('adminManageInvester')}}" class="btn btn-secondary">Cancel</a>
                 <button type="commit" class="btn btn-success float-right">Create</button>
             </div>
         </div> --}}

@@ -47,7 +47,6 @@
                             <p>Address: {{$project->province->full_name}}, {{$project->district->full_name}},
                                 {{$project->ward->full_name}}</p>
                         </div>
-
                     </div>
                 </td>
 

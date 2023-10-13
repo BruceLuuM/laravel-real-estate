@@ -1,6 +1,6 @@
 <div class="news_info">
     <a href="{{Route('showNew',['new'=>$new->slug])}}">
-        <img src="{{$new->images ? asset('storage/'. $new->images) : asset('/images/no_image.jpg')}}"
+        <img type="image/webp" src=" {{$new->images ? asset('storage/'. $new->images) : asset('/images/no_image.jpg')}}"
             alt="new-image-holder">
     </a>
     <div class="news_des">

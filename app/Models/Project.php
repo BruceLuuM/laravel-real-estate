@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Arr;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -13,6 +14,16 @@ class Project extends Model
 
     protected $fillable = ['invester_id', 'category_id', 'province_id', 'district_id', 'ward_id', 'name', 'slug', 'area', 'area_unit', 'description', 'images'];
 
+    public function scopeFilter($query, array $filters)
+    {
+
+        if ($searchTerm = Arr::get($filters, 'project_id')) {
+            $query->where('project_id', '=', $searchTerm);
+        }
+        // Add more conditions as needed...
+
+        return $query;
+    }
 
     public function invester()
     {

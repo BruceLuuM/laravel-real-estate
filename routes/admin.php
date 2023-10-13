@@ -11,9 +11,16 @@ use App\Http\Controllers\Admin\AdminManageAdminsController;
 use App\Http\Controllers\Admin\AdminManageProjectsController;
 use App\Http\Controllers\Admin\AdminManageInvestersController;
 use App\Http\Controllers\Admin\AdminManageCategoriesController;
+use App\Http\Controllers\Admin\PermissionActionController;
+use App\Models\PermissionAction;
 
 Route::get('/admin_login', [AdminController::class, 'adminlogin'])->name('adminlogin');
 Route::post('/authenticate', [AdminController::class, 'authenticate'])->name('adminauthenticate');
+
+// Live Search
+// Route::get('/search_news', [LiveSearchController::class, 'search_news'])->name('search_news');
+// Route::get('/search_districts', [LiveSearchController::class, 'search_districts'])->name('search_districts');
+// Route::get('/search_wards', [LiveSearchController::class, 'search_wards'])->name('search_wards');
 
 // ----------------------------------Test Admin LTE----------------------------------
 
@@ -22,7 +29,7 @@ Route::middleware('auth:admin')->group(function () {
     // Route::get('/', [AdminController::class, 'index'])->name('adminPage');
     Route::post('/logout', [AdminController::class, 'logout'])->name('adminLogout');
 
-    // manage admins ~ not done
+    // manage admins ~ done
     Route::prefix('/manage_admins')->group(function () {
         // index page
         Route::get('/', [AdminManageAdminsController::class, 'index_LTE'])->name('adminManageAdmin');
@@ -76,7 +83,7 @@ Route::middleware('auth:admin')->group(function () {
         Route::get('/show/{category}', [AdminManageCategoriesController::class, 'show'])->name('adminShowCategory');
     });
 
-    // manage investers ~ not done
+    // manage investers ~ done
     Route::prefix('/manage_investers')->group(function () {
         //index page
         Route::get('/', [AdminManageInvestersController::class, 'index_LTE'])->name('adminManageInvester');
@@ -94,10 +101,10 @@ Route::middleware('auth:admin')->group(function () {
         Route::get('/show/{invester}', [AdminManageInvestersController::class, 'show'])->name('adminShowInvester');
     });
 
-    // manage news ~ not done
+    // manage news ~ done
     Route::prefix('/manage_news')->group(function () {
         //index page
-        Route::get('/', [AdminManageNewsController::class, 'index'])->name('adminManageNew');
+        Route::get('/', [AdminManageNewsController::class, 'index_LTE'])->name('adminManageNew');
         // show create form
         Route::get('/create', [AdminManageNewsController::class, 'create'])->name('adminCreateNew');
         // Store new data
@@ -108,9 +115,11 @@ Route::middleware('auth:admin')->group(function () {
         Route::put('/{new}', [AdminManageNewsController::class, 'update'])->name('adminUpdateNew');
         // Destroy new
         Route::delete('/{new}', [AdminManageNewsController::class, 'destroy'])->name('adminDeleteNew');
+        // Show new
+        Route::get('/show/{new}', [AdminManageNewsController::class, 'show'])->name('adminShowNew');
     });
 
-    // manage projects ~ not done
+    // manage projects ~ done
     Route::prefix('/manage_projects')->group(function () {
         //index page
         Route::get('/', [AdminManageProjectsController::class, 'index'])->name('adminManageProject');
@@ -124,9 +133,11 @@ Route::middleware('auth:admin')->group(function () {
         Route::put('/{project}', [AdminManageProjectsController::class, 'update'])->name('adminUpdateProject');
         // Destroy new
         Route::delete('/{project}', [AdminManageProjectsController::class, 'destroy'])->name('adminDeleteProject');
+        // Show new
+        Route::get('/show/{project}', [AdminManageProjectsController::class, 'show'])->name('adminShowProject');
     });
 
-    // manage modules ~ done    
+    // manage modules ~ done
     Route::prefix('/modules')->group(function () {
         //index page-done
         Route::get('/', [ModuleController::class, 'index'])->name('adminManageModule');
@@ -164,13 +175,15 @@ Route::middleware('auth:admin')->group(function () {
 
     // manage permisson ~ not done    
     Route::prefix('/manage_permissions')->group(function () {
-        //index page
+        //index page-done
         Route::get('/', [PermissionController::class, 'index'])->name('adminManagePermission');
-        // show create form
+        // show create form-done
         Route::get('/create', [PermissionController::class, 'create'])->name('adminCreatePermission');
-        // Store permission data
+        // Store permission data-done
         Route::post('/', [PermissionController::class, 'store'])->name('adminStorePermission');
-        // show edit form
+        // Store permission custom data-done
+        Route::post('/act', [PermissionActionController::class, 'store'])->name('adminStorePermissionAction');
+        // show edit form-currently working
         Route::get('/{permission}/edit', [PermissionController::class, 'edit'])->name('adminEditPermission');
         // Update permission
         Route::put('/{permission}', [PermissionController::class, 'update'])->name('adminUpdatePermission');

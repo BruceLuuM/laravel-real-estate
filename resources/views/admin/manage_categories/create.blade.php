@@ -26,7 +26,7 @@
                 </option>
                 <option value="Văn phòng" @if (old('type')=='Văn phòng' ) {{'selected'}} @endif>Văn phòng
                 </option>
-                <option value="Biệt thự" @if (old('type')=='Biệt thự ' ) {{'selected'}} @endif>Biệt thự
+                <option value="Biệt thự" @if (old('type')=='Biệt thự' ) {{'selected'}} @endif>Biệt thự
                 </option>
                 <option value="BĐS thương mại" @if (old('type')=='BĐS thương mại' ) {{'selected'}} @endif> BĐS thương
                     mại
@@ -36,7 +36,7 @@
                 <option value="BĐS nông nghiệp" @if (old('type')=='BĐS nông nghiệp' ) {{'selected'}} @endif>BĐS nông
                     nghiệp
                 </option>
-                <option value="BĐS công nghiệp" @if (old('type')=='BĐS công nghiệp ' ) {{'selected'}} @endif>BĐS
+                <option value="BĐS công nghiệp" @if (old('type')=='BĐS công nghiệp' ) {{'selected'}} @endif>BĐS
                     công nghiệp
                 </option>
                 <option value="BĐS tâm linh" @if (old('type')=='BĐS tâm linh' ) {{'selected'}} @endif>BĐS tâm linh

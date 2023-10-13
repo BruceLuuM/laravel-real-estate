@@ -46,7 +46,7 @@
                                 <tr>
                                     <th style="width:4%">#</th>
                                     <th style="width:4%">ID</th>
-                                    <th>Structure</th>
+                                    <th>Permission Name</th>
                                     <th style="width:4%">View</th>
                                     <th style="width:4%">Edit</th>
                                     <th style="width:4%">Delete</th>
@@ -106,7 +106,7 @@
                                 <tr>
                                     <th>#</th>
                                     <th>ID</th>
-                                    <th>Structure</th>
+                                    <th>Permission Name</th>
                                     <th>View</th>
                                     <th>Edit</th>
                                     <th>Delete</th>

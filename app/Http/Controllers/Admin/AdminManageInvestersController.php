@@ -46,23 +46,20 @@ class AdminManageInvestersController extends Controller
             'brief' => ['required'],
             'description' => ['required'],
         ]);
-
         if ($request->hasFile('invester_logo')) {
-            $formFields['invester_logo'] = $request->file('invester_logo')->storeAs('invester_logo', 'investerLogo' . '-' . time() . '.jpg', 'public');
+            $formFields['invester_logo']  = $request->file('invester_logo')->storeAs('invester_logo', 'investerLogo' . '-' . time() . '.jpg', 'public');
         }
 
         $formFields['slug'] = Str::slug($request->name);
-
         //Create invester
         Invester::create($formFields);
-
-        return redirect()->route('adminManageInvesters');
+        return redirect()->route('adminManageInvester');
     }
 
     //edit form
     public function edit(Invester $invester)
     {
-        return view('admin.manage_investers.edit', [
+        return view('adminLTE.manage_investers.edit', [
             'invester' => $invester,
         ]);
     }
@@ -88,7 +85,7 @@ class AdminManageInvestersController extends Controller
 
         $invester->update($formFields);
         $invester->touch();
-        return redirect()->route('adminManageInvesters');
+        return redirect()->route('adminManageInvester');
     }
 
     //destroy
@@ -99,6 +96,6 @@ class AdminManageInvestersController extends Controller
         }
         // unlink('storage/' . $invester->invester_logo);
         $invester->delete();
-        return redirect()->route('adminManageInvesters');
+        return redirect()->route('adminManageInvester');
     }
 }

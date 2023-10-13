@@ -16,15 +16,22 @@ class AdminManageProjectsController extends Controller
 {
     public function index()
     {
-        return view('admin.manage_projects.index', [
+        return view('adminLTE.manage_projects.manage', [
             'projects' => Project::latest()->paginate(5),
         ]);
     }
 
     public function create()
     {
-        return view('admin.manage_projects.create', [
+        return view('adminLTE.manage_projects.create', [
             'investers' => Invester::all(),
+        ]);
+    }
+
+    public function show(Project $project)
+    {
+        return view('adminLTE.manage_projects.show', [
+            'project' => $project,
         ]);
     }
 
@@ -50,13 +57,13 @@ class AdminManageProjectsController extends Controller
 
         Project::create($formFields);
 
-        return redirect()->route('adminManageProjects');
+        return redirect()->route('adminManageProject');
     }
 
     // show edit form
     public function edit(Project $project)
     {
-        return view('admin.manage_projects.edit', [
+        return view('adminLTE.manage_projects.edit', [
             'project' => $project,
             'investers' => Invester::all(),
         ]);
@@ -90,7 +97,7 @@ class AdminManageProjectsController extends Controller
 
         $project->update($formFields);
         $project->touch();
-        return redirect()->route('adminManageProjects');
+        return redirect()->route('adminManageProject');
     }
 
     //delete ~ destroy
@@ -101,6 +108,6 @@ class AdminManageProjectsController extends Controller
             // unlink('storage/' . $project->images);
         }
         $project->delete();
-        return redirect()->route('adminManageProjects');
+        return redirect()->route('adminManageProject');
     }
 }

@@ -13,6 +13,7 @@ class Permission extends Model
 
     protected $fillable = [
         'permission_name',
-        'permission_actions',
+        'action_id',
+        'base_action',
     ];
 }

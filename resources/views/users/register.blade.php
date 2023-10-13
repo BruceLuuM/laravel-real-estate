@@ -35,10 +35,12 @@
                             @enderror
 
                             <input placeholder="Số điện thoại(*)" name="phonenumber" type="tel"
-                                value="{{old('phonenumber')}}">
-                            @error('phonenumber')
-                            <p class="error"> {{$message}} </p>
-                            @enderror
+                                value="{{old('phonenumber')}}" id="phonenumber">
+                            <span style="color:red" id='phonenumber_check'>
+                                @error('phonenumber')
+                                <p class="error"> {{$message}} </p>
+                                @enderror
+                            </span>
 
                             <input placeholder="Địa chỉ Email(*)" name="email" type="email" value="{{old('email')}}">
                             @error('email')

@@ -162,11 +162,12 @@ input::file-selector-button:hover {
 
 .searchbar {
     display: flex;
+    justify-content: space-around;
 }
 .searchbar .fastsearch {
     margin: auto 0;
-    padding-right: 14px;
 }
+
 .searchbar .fastsearch select {
     width: 120px;
     border: 1px solid #8f8f8f;
@@ -177,6 +178,9 @@ input::file-selector-button:hover {
 
 .search_container {
     display: flex;
+    justify-content: space-around;
+    width: 100%;
+    margin-bottom: 15px;
 }
 
 .search_tools {
@@ -185,11 +189,11 @@ input::file-selector-button:hover {
     display: inline-block;
     border-radius: 5px 0 0 5px;
     height: 30px;
-    width: 88%;
+    width: 90%;
 }
 
 .search_bar {
-    height: 200px;
+    height: 140px;
     background-color: #fff;
 }
 
@@ -352,6 +356,7 @@ ul.list_sidebar li:hover {
     height: 100%;
     padding: 0.1px 10px 10px 10px;
     background-color: #fff;
+    min-height: 900px;
 }
 
 .news_info {
@@ -426,7 +431,7 @@ ul.list_sidebar li:hover {
     border-radius: 5px;
     margin: 10px;
     text-align: center;
-    width: 160px;
+    width: 7vw;
 }
 
 .overall .blank {
@@ -458,7 +463,7 @@ ul.list_sidebar li:hover {
 }
 
 .formContainer input {
-    width: 520px;
+    width: 500px;
     padding: 15px 10px;
     border: 1px solid #000;
     border-radius: 7px;

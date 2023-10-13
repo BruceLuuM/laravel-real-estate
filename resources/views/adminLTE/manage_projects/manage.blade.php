@@ -1,10 +1,16 @@
 @extends('adminLTE.layout.master')
-@section('title','Admin Invester Management')
-@section('InvestersManagement','active')
+@section('title','Admin Project Management')
+@section('ProjectsManagement','active')
 
 @section('page-level-style')
 <style type="text/css">
-
+    .description_data_view {
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 7;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
 </style>
 @endsection
 
@@ -14,12 +20,12 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Manage Invester</h1>
+                <h1>Manage Project</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active">Manage Invester</li>
+                    <li class="breadcrumb-item active">Manage Project</li>
                 </ol>
             </div>
         </div>
@@ -34,8 +40,8 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <a class="btn btn-success float-sm-right" href="{{route('adminCreateInvester')}}">Add a
-                            Invester</a>
+                        <a class="btn btn-success float-sm-right" href="{{route('adminCreateProject')}}">Add a
+                            Project</a>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
@@ -43,48 +49,70 @@
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Name</th>
+                                    <th>Images</th>
+                                    <th>Invester</th>
+                                    <th>Category</th>
                                     <th>Brief</th>
-                                    <th>Created_at</th>
-                                    <th>Updated_at</th>
+                                    <th>Description</th>
+                                    <th>created_at</th>
+                                    <th>updated_at</th>
                                     <th>Function</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($investers as $invester)
+                                @foreach($projects as $project)
                                 <tr>
                                     <td>
-                                        {{$invester->id}}
+                                        {{$project->id}}
                                     </td>
-                                    <td>
-                                        {{$invester->name}}
+                                    <td style="width:200px; height: 105px;">
+                                        <img src="{{$project->images ? asset('storage/'. $project->images) : asset('/images/no_image.jpg')}}"
+                                            alt="" style="height: 100px; width: 100px">
                                     </td>
-                                    <td>
-                                        <div class="text-truncate overflow" style="width: 18vw">
-                                            {{$invester->brief}}
+                                    <td>{{$project->invester->name}}</td>
+
+                                    <td>{{$project->category->type}}</td>
+
+                                    <td style="width: 300px">
+                                        <div class="projects_des" style="padding:0">
+                                            <p class="tdDescriptionStyle" style="font-weight:bold;">
+                                                {{$project->name}}</p>
+                                            <div class="core_info">
+                                                <p>Area: <strong style="color:red">{{$project->area.'
+                                                        '.$project->area_unit}}</strong>
+                                                </p>
+                                                <p>Address: {{$project->province->full_name}},
+                                                    {{$project->district->full_name}},
+                                                    {{$project->ward->full_name}}</p>
+                                            </div>
+
                                         </div>
                                     </td>
+                                    <td class="description_data_view">
+                                        <p style="width: 300px">{{$project->description}}</p>
+                                    </td>
+
                                     <td>
-                                        {{$invester->created_at}}
+                                        {{$project->created_at}}
                                     </td>
                                     <td>
-                                        {{$invester->updated_at}}
+                                        {{$project->updated_at}}
                                     </td>
-                                    <td class="project-actions text-right">
+                                    <td class="project-actions text-right" style="width: 224px">
                                         <a class="btn btn-primary btn-sm"
-                                            href="{{route('adminShowInvester',['invester'=>$invester->id])}}">
+                                            href="{{route('adminShowProject',['project'=>$project->id])}}">
                                             <i class="fas fa-folder">
                                             </i>
                                             View
                                         </a>
                                         <a class="btn btn-info btn-sm"
-                                            href="{{route('adminEditInvester',['invester'=>$invester->id])}}">
+                                            href="{{route('adminEditProject',['project'=>$project->id])}}">
                                             <i class="fas fa-pencil-alt">
                                             </i>
                                             Edit
                                         </a>
                                         <a class="btn p-0">
-                                            <form action="{{route('adminDeleteInvester',['invester'=>$invester->id]);}}"
+                                            <form action="{{route('adminDeleteProject',['project'=>$project->id]);}}"
                                                 method="POST">
                                                 @csrf
                                                 @method('DELETE')
@@ -99,10 +127,13 @@
                             <tfoot>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Name</th>
+                                    <th>Images</th>
+                                    <th>Invester</th>
+                                    <th>Category</th>
                                     <th>Brief</th>
-                                    <th>Created_at</th>
-                                    <th>Updated_at</th>
+                                    <th>Description</th>
+                                    <th>created_at</th>
+                                    <th>updated_at</th>
                                     <th>Function</th>
                                 </tr>
                             </tfoot>
@@ -131,6 +162,7 @@
             lengthChange: false,
             autoWidth: false,
             buttons: ["copy", "csv", "excel", "pdf", "print", "colvis"],
+
           })
           .buttons()
           .container()

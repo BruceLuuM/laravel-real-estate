@@ -45,6 +45,16 @@ class PermissionController extends Controller
      */
     public function store(Request $request)
     {
+        $formFields = $request->validate([
+            'permission_name' => ['required'],
+            'base_action' => ['nullable'],
+            'action_id' => ['nullable'],
+        ]);
+
+        $formFields['base_action'] = implode(" ", $request->base);
+        $formFields['action_id'] = implode(" ", $request->custom);
+        Permission::create($formFields);
+        return redirect()->route('adminManagePermission');
     }
 
     /**
@@ -55,7 +65,6 @@ class PermissionController extends Controller
      */
     public function show(Permission $permission)
     {
-        //
     }
 
     /**
@@ -66,7 +75,16 @@ class PermissionController extends Controller
      */
     public function edit(Permission $permission)
     {
-        //
+        $custom = explode(' ', $permission->action_id);
+        $base = explode(' ', $permission->base_action);
+        return view('adminLTE.manage_permissions.edit', [
+            'permission' => $permission,
+            'bases' => $base,
+            'customs' => $custom,
+            'PerActs' => PermissionAction::all(),
+            'modules' => Module::all(),
+
+        ]);
     }
 
     /**
@@ -89,6 +107,7 @@ class PermissionController extends Controller
      */
     public function destroy(Permission $permission)
     {
-        //
+        $permission->delete();
+        return redirect()->route('adminManagePermission');
     }
 }

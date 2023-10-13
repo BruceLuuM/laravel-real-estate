@@ -8,7 +8,10 @@
             <p>No category found</p>
             @else
             @foreach($categories as $category)
-            <li><a href="">{{$category->type}}</a></li>
+            {{-- not that SEO yet --}}
+            <li><a href="/search_news?category_id={{$category->id}}"><i class="fa fa-chevron-right"
+                        style="font-size: 3.8mm; opacity:0.3" aria-hidden="true"></i>
+                    {{$category->type}}</a></li>
             @endforeach
             @endif
         </ul>

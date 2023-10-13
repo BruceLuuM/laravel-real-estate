@@ -29,27 +29,27 @@
             <div class="dashboard_sidebar_menu">
                 <ul class="dashboard_menu_lists">
                     <li>
-                        <a href="{{Route('adminManageUsers')}}"><i class="fa fa-dashboard"></i>
+                        <a href="{{Route('adminManageUser')}}"><i class="fa fa-dashboard"></i>
                             <span class="menuText">Manage Users</span>
                         </a>
                     </li>
                     <li>
-                        <a href="{{Route('adminManageCategories')}}"><i class="fa fa-dashboard"></i>
+                        <a href="{{Route('adminManageCategory')}}"><i class="fa fa-dashboard"></i>
                             <span class="menuText">Manage Categories</span>
                         </a>
                     </li>
                     <li>
-                        <a href="{{Route('adminManageInvesters')}}"><i class="fa fa-dashboard"></i>
+                        <a href="{{Route('adminManageInvester')}}"><i class="fa fa-dashboard"></i>
                             <span class="menuText">Manage Investers</span>
                         </a>
                     </li>
                     <li>
-                        <a href="{{Route('adminManageNews')}}"><i class="fa fa-dashboard"></i>
+                        <a href="{{Route('adminManageNew')}}"><i class="fa fa-dashboard"></i>
                             <span class="menuText">Manage News</span>
                         </a>
                     </li>
                     <li>
-                        <a href="{{Route('adminManageProjects')}}"><i class="fa fa-dashboard"></i>
+                        <a href="{{Route('adminManageProject')}}"><i class="fa fa-dashboard"></i>
                             <span class="menuText">Manage Projects</span>
                         </a>
                     </li>
@@ -72,7 +72,6 @@
                     {{-- content start here --}}
                     {{$slot}}
                     {{-- content end here --}}
-
 
                 </div>
             </div>

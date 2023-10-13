@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
-use App\Models\PermissionAction;
+use App\Models\news_blog;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
-class PermissionActionController extends Controller
+class NewsBlogController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +14,10 @@ class PermissionActionController extends Controller
      */
     public function index()
     {
-        //
+        return view('blog.index', [
+            'news_blogs' => news_blog::latest()->paginate(10),
+            'investers' => \App\Models\Invester::latest()->paginate(5),
+        ]);
     }
 
     /**
@@ -36,33 +38,29 @@ class PermissionActionController extends Controller
      */
     public function store(Request $request)
     {
-        $formFields = $request->validate([
-            'action_name' => ['required'],
-            'description' => ['required'],
-        ]);
-
-        PermissionAction::create($formFields);
-        return back();
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\PermissionAction  $permissionAction
+     * @param  \App\Models\news_blog  $news_blog
      * @return \Illuminate\Http\Response
      */
-    public function show(PermissionAction $permissionAction)
+    public function show(news_blog $news_blog)
     {
-        //
+        return view('blog.show', [
+            'news_blog' => $news_blog
+        ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\PermissionAction  $permissionAction
+     * @param  \App\Models\news_blog  $news_blog
      * @return \Illuminate\Http\Response
      */
-    public function edit(PermissionAction $permissionAction)
+    public function edit(news_blog $news_blog)
     {
         //
     }
@@ -71,10 +69,10 @@ class PermissionActionController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\PermissionAction  $permissionAction
+     * @param  \App\Models\news_blog  $news_blog
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, PermissionAction $permissionAction)
+    public function update(Request $request, news_blog $news_blog)
     {
         //
     }
@@ -82,10 +80,10 @@ class PermissionActionController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\PermissionAction  $permissionAction
+     * @param  \App\Models\news_blog  $news_blog
      * @return \Illuminate\Http\Response
      */
-    public function destroy(PermissionAction $permissionAction)
+    public function destroy(news_blog $news_blog)
     {
         //
     }

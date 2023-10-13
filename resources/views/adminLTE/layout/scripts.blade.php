@@ -20,6 +20,7 @@
 <!-- Tempusdominus Bootstrap 4 -->
 <script src="{{asset('plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js')}}"></script>
 <!-- Summernote -->
+
 <script src="{{asset('plugins/summernote/summernote-bs4.min.js')}}"></script>
 <!-- overlayScrollbars -->
 <script src="{{asset('plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')}}"></script>
@@ -57,12 +58,16 @@
 {{-- Bootstrap switch --}}
 <script src="{{asset('plugins/bootstrap-switch/js/bootstrap-switch.min.js')}}"></script>
 
+{{-- Custom live-search --}}
+<script type="text/javascript" src="{{ asset('js/search.js') }}"></script>
+
 
 {{-- stack script --}}
 @stack('script_tablefunction')
 @stack('script_user_validate')
 @stack('script_admin_validate')
 @stack('script_invester_image_change')
+@stack('script_summernote')
 @stack('steper_script')
 @stack('select2')
 @stack('script_permission_validate')

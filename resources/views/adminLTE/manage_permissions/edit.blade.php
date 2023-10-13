@@ -1,6 +1,6 @@
 @extends('adminLTE.layout.master')
-@section('title','Admin module Management')
-@section('ModulesManagement','active')
+@section('title','Permission Management')
+@section('PermissionsManagement','active')
 
 @section('page-level-style')
 <style type="text/css">
@@ -25,159 +25,83 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>EDIT Module</h1>
+                <h1>Permission Add</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active">Edit Module</li>
+                    <li class="breadcrumb-item active">Permission Add</li>
                 </ol>
             </div>
         </div>
-    </div>
-    <!-- /.container-fluid -->
+    </div><!-- /.container-fluid -->
 </section>
 
 <!-- Main content -->
 <section class="content">
-    <div class="row">
-        <form action="{{route('adminUpdateModule',['module'=>$module->id])}}" method="post" id="ModuleEditForm"
-            class="col-md-6">
-            @csrf
-            @method('PUT')
-            <div class="row">
-                <div class="col-md">
-                    <div class="card card-primary">
-                        <div class="card-header">
-                            <h3 class="card-title">Editing Module ID: {{$module->id}}</h3>
-                            <div class="card-tools">
-                                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                                    <i class="fas fa-minus"></i>
-                                </button>
+    <form action="{{route('adminStorePermission')}}" method="post" id="PermissionCreateForm">
+        @csrf
+        <div class="row">
+            <div class="col-md-4">
+                <div class="sticky-top" style="top:0.5em">
+                    <div class="row">
+                        <div class="col-md">
+                            <div class="card card-~primary">
+                                <div class="card-header">
+                                    <h3 class="card-title">Editting permission ID: {{$permission->id}}</h3>
+                                    <div class="card-tools">
+                                        <button type="button" class="btn btn-tool" data-card-widget="collapse"
+                                            title="Collapse">
+                                            <i class="fas fa-minus"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <label for="InputEmail1">Permission name: </label>
+                                        <input type="text" name="permission_name" class="form-control"
+                                            placeholder="Enter Permission name"
+                                            value="{{$permission->permission_name}}">
+                                    </div>
+                                    @error('permission_name')
+                                    <p class="error"> {{$message}} </p>
+                                    @enderror
+
+                                    <div class="form-group">
+                                        <label for="permissions_action_function_id">Custom role</label>
+                                        <select class="select2" multiple="multiple"
+                                            data-placeholder="Roles of per~mission" style="width: 100%;" name="base[]"
+                                            id="RoleID">
+                                            @foreach($PerActs as $PerAct)
+                                            <option value="{{$PerAct->id}}" @foreach($custom_actions as $custom)
+                                                @if($PerAct->id == $custom) {{'selected'}} @endif @endforeach
+                                                >
+                                                {{$PerAct->action_name}} --
+                                                {{$PerAct->description}}
+                                            </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    @error('base')
+                                    <p class="text-danger"> {{$message}} </p>
+                                    @enderror
+                                </div>
+                                <!-- /.card -->
                             </div>
                         </div>
-                        <div class="card-body">
-                            <fieldset class="border rounded">
-                                <legend class="text-center">Main information</legend>
-                                <div class="col-0 d-flex">
-                                    <div class="form-group col-6">
-                                        <label for="module_name">Module Name</label>
-                                        <input type="text" name="module_name" class="form-control" id="ModuleName"
-                                            placeholder="Enter module name" value="{{$module->module_name}}">
-                                        @error('module_name')
-                                        <p class="text-danger"> {{$message}} </p>
-                                        @enderror
-                                    </div>
-
-                                    <div class="form-group col-6">
-                                        <label for="module_route">Module Route</label>
-                                        <input type="text" name="module_route" class="form-control" id="ModuleRoute"
-                                            placeholder="Enter module route" value="{{$module->module_route}}">
-                                        @error('module_route')
-                                        <p class="text-danger"> {{$message}} </p>
-                                        @enderror
-                                    </div>
-                                </div>
-                            </fieldset>
-
-                            <fieldset class="border rounded">
-                                <legend class="text-center">Placement</legend>
-                                <div class="col-0 d-flex">
-                                    <div class="form-group col-6">
-                                        <label for="module_folder">Module Folder</label>
-                                        <input type="text" name="module_folder" class="form-control" id="ModuleFolder"
-                                            placeholder="Enter module folder" value="{{$module->module_folder}}">
-                                        @error('module_folder')
-                                        <p class="text-danger"> {{$message}} </p>
-                                        @enderror
-                                    </div>
-
-
-                                    <div class="form-group col-6">
-                                        <label for="module_file">Module File</label>
-                                        <input type="text" name="module_file" class="form-control" id="ModuleFile"
-                                            placeholder="Enter module file" value="{{$module->module_file}}">
-                                        @error('module_file')
-                                        <p class="text-danger"> {{$message}} </p>
-                                        @enderror
-                                    </div>
-
-                                </div>
-                            </fieldset>
-
-                            <fieldset class="border rounded">
-                                <legend class="text-center">Others</legend>
-                                <div class="col-0 d-flex">
-                                    <div class="form-group col-6">
-                                        <label for="module_css">Module css</label>
-                                        <input type="text" name="module_css" class="form-control" id="ModuleCSS"
-                                            placeholder="Enter module name" value="{{$module->module_css}}">
-                                        @error('module_css')
-                                        <p class="text-danger"> {{$message}} </p>
-                                        @enderror
-                                    </div>
-
-
-                                    <div class="form-group col-6">
-                                        <label for="module_position">Module position</label>
-                                        <input type="text" name="module_position" class="form-control"
-                                            id="ModulePosition" placeholder="Enter module position"
-                                            value="{{$module->module_position}}">
-                                        @error('module_position')
-                                        <p class="text-danger"> {{$message}} </p>
-                                        @enderror
-                                    </div>
-
-                                </div>
-                            </fieldset>
-
-                            <div class="form-group">
-                                <label for="module_function_id">Module Functions</label>
-                                <select class="select2" multiple="multiple"
-                                    data-placeholder="Select Functions for Module" style="width: 100%;"
-                                    name="module_function_id[]" id="ModuleFunctionId">
-                                    @foreach($moduleFunctions as $moduleFunction)
-                                    <option value="{{$moduleFunction->id}}" @foreach($id_arrs as $id_arr)
-                                        @if($id_arr==$moduleFunction->id)
-                                        {{'selected'}}
-                                        @endif
-                                        @endforeach
-                                        >
-                                        {{$moduleFunction->function_name}}
-                                        <h4>
-                                            -- {{$moduleFunction->description}}
-                                        </h4>
-                                    </option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            @error('module_function_id')
-                            <p class="text-danger"> {{$message}} </p>
-                            @enderror
-
-                            <div class="form-group d-flex">
-                                <label for="active" class="p-0 mr-1 mb-0">Active? </label>
-                                <input type="hidden" name="active" value="0" />
-                                <input type="checkbox" name="active" checked value="1">
-                            </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <a href="{{route('adminManagePermission')}}" class="btn btn-secondary">Cancel</a>
+                            <button type="commit" class="btn btn-success float-right">Create</button>
                         </div>
-                        <!-- /.card -->
                     </div>
                 </div>
-
             </div>
-            <div class="row">
-                <div class="col-12">
-                    <a href="{{route('adminManageModule')}}" class="btn btn-secondary">Cancel</a>
-                    <button type="commit" class="btn btn-success float-right">Edit</button>
-                </div>
-            </div>
-        </form>
-        <div class="row col-md-6">
-            <div class="col-md">
+            <div class="col-md-8">
                 <div class="card card-secondary">
                     <div class="card-header">
-                        <h3 class="card-title">Module Function Structure</h3>
+                        <h3 class="card-title">Permission Basic Rules</h3>
                         <div class="card-tools">
                             <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
                                 <i class="fas fa-minus"></i>
@@ -186,98 +110,148 @@
                     </div>
                     <div class="card-body">
                         <fieldset class="border rounded p-2">
-                            <legend class="text-center">Function structure</legend>
-                            <table id="FuncS" class="table table-bordered table-striped">
+                            <legend class="text-center">Roles Structure</legend>
+                            <div class="d-flex flex-row-reverse">
+                                <div class="align-self-center">
+                                    Check all ?
+                                    <input type="checkbox" id="checkAll" class="mr-2">
+                                </div>
+                            </div>
+                            <table id="CrePer" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Function Name</th>
-                                        <th>Module route name</th>
+                                        <th>Module</th>
+                                        <th>Check all</th>
+                                        <th>Watch</th>
+                                        <th>Create</th>
                                         <th>Edit</th>
                                         <th>Delete</th>
                                     </tr>
                                 </thead>
+
                                 <tbody>
                                     @php
                                     $index = 1;
                                     @endphp
-                                    @foreach(explode(" ",$module->module_function_id) as $function)
-                                    @foreach($moduleFunctions as $moduleFunction)
-                                    @if($moduleFunction->id != $function)
-                                    @continue
-                                    @endif
-
+                                    @foreach($modules as $module)
                                     <tr>
                                         <td> {{$index++}}
                                         </td>
                                         <td class="align-items-center">
                                             <div>
-                                                {{$moduleFunction->function_name}}
+                                                {{$module->module_name}}
                                             </div>
                                         </td>
                                         <td>
-                                            <div class="col-12">
-                                                {{$moduleFunction->function_route}}
+                                            <div class="form-check text-center">
+                                                <input type="checkbox" class="form-check-input"
+                                                    id="checkall{{$module->id}}">
                                             </div>
                                         </td>
-                                        <td class="project-actions text-center">
-                                            <a class="btn btn-info btn-sm"
-                                                href="{{route('adminEditModuleFunction',['modulefunction'=>$moduleFunction->id])}}">
-                                                <i class="fas fa-pencil-alt">
-                                                </i>
-                                            </a>
+                                        <td>
+                                            <div class="form-check text-center">
+                                                <input type="checkbox" class="form-check-input" name="base[]"
+                                                    id="w{{$module->id}}" value="w{{$module->id}}"
+                                                    @foreach($base_actions as $base_action)
+                                                    @if($base_action=="w{{$module->id}}" ){{'selected'}}@endif
+                                                    @endforeach>
+                                            </div>
                                         </td>
-                                        <td class="project-actions text-center">
-                                            <a class="btn p-0 text-center">
-                                                <form
-                                                    action="{{route('adminDeleteModuleFunction',['modulefunction'=>$moduleFunction->id]);}}"
-                                                    method="POST">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button class="btn btn-danger btn-sm"><i
-                                                            class="fas fa-trash"></i></button>
-                                                </form>
-                                            </a>
+                                        <td>
+                                            <div class="form-check text-center">
+                                                <input type="checkbox" class="form-check-input" name="base[]"
+                                                    id="c{{$module->id}}" value="c{{$module->id}}">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-check text-center">
+                                                <input type="checkbox" class="form-check-input" name="base[]"
+                                                    id="e{{$module->id}}" value="e{{$module->id}}">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-check text-center">
+                                                <input type="checkbox" class="form-check-input" name="base[]"
+                                                    id="d{{$module->id}}" value="d{{$module->id}}">
+                                            </div>
                                         </td>
                                     </tr>
-                                    @endforeach
                                     @endforeach
                                 </tbody>
                             </table>
                         </fieldset>
-                        <fieldset class="border rounded">
-                            <legend class="text-center">Action</legend>
-                            <div class="card-header text-center">
-                                <a class="btn btn-success" href="{{route('adminCreateModule')}}">
-                                    Add a Module/Function
-                                </a>
-                            </div>
-
-                        </fieldset>
                     </div>
                     <!-- /.card -->
                 </div>
+    </form>
+    <form action="{{route('adminStorePermissionAction')}}" method="post" id="PermissionCreateForm">
+        @csrf
+        <div class="card card-secondary collapsed-card">
+            <div class="card-header">
+                <h3 class="card-title">Make a Custom Roles</h3>
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                </div>
             </div>
-
+            <div class="card-body">
+                <fieldset class="border rounded p-2">
+                    <legend class="text-center">Custom Structure</legend>
+                    <div class="form-group">
+                        <label for="InputEmail1">Name: </label>
+                        <input type="text" name="action_name" class="form-control" placeholder="Enter Role name">
+                    </div>
+                    @error('action_name')
+                    <p class="error"> {{$message}} </p>
+                    @enderror
+                    <div class="form-group">
+                        <label for="InputEmail1">Description: </label>
+                        <textarea name="description" class="form-control" rows="4"
+                            placeholder="Role descriptions"></textarea>
+                    </div>
+                    @error('description')
+                    <p class="error"> {{$message}} </p>
+                    @enderror
+                </fieldset>
+                <div class="col-12">
+                    <button type="commit" class="btn btn-success float-right">Create</button>
+                </div>
+            </div>
+            <!-- /.card -->
         </div>
+    </form>
+    </div>
     </div>
 
 </section>
 @endsection
 
 <!-- Page specific script -->
-@push('script_function_validate')
-@endpush
-
-@push('select2')
+@push('script_permission_validate')
 <script>
+    // select2 implement
     $(function() {
         $('.select2').select2()
-    });    
+    });
     
+    // check all attr
+    $("#checkAll").click(function(){
+        $('input:checkbox').not(this).prop('checked', this.checked);
+    })
+
+    $("input:checkbox").click(function(){
+        $val=$(this).attr("id").replace('checkall','');
+        $("#w"+$val).not(this).prop('checked', this.checked);
+        $("#c"+$val).not(this).prop('checked', this.checked);
+        $("#e"+$val).not(this).prop('checked', this.checked);
+        $("#d"+$val).not(this).prop('checked', this.checked);
+    });
+
     // fast search attr
     $(function () {
-        $("#FuncS")
+        $("#CrePer")
           .DataTable({
             responsive: true,
             lengthChange: false,
@@ -285,7 +259,7 @@
           })
           .buttons()
           .container()
-          .appendTo("#FuncS_wrapper .col-md-6:eq(0)");
+          .appendTo("#CrePer_wrapper .col-md-6:eq(0)");
       });
 </script>
 @endpush

@@ -17,6 +17,8 @@ class AdminController extends Controller
     public function index_LTE()
     {
         return view('adminLTE.dashbroad');
+        // return view('admin.manage_investers.index');
+
         // views via resource/views/listing/index.blade.php
         // about paginate(#num): is divide news list into page while each page contain #num of elements
     }

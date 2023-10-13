@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="keywords" content="HTML, CSS, JavaScript">
     <meta name="author" content="Bruce Luu">
-
+    <meta name="description" content="Author: Bruce Luu TRUST!!">
     <link rel="stylesheet" type="text/css" href="/css/aftermix/all.css" />
 
     {{--

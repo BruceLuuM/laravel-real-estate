@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Arr;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class News extends Model
 {
@@ -15,12 +16,30 @@ class News extends Model
 
     public function scopeFilter($query, array $filters)
     {
-        if ($filters['search'] ?? false) {
-            $query->where('news_header', 'like', '%' . request('search') . '%')
-                ->orwhere('province_id', 'like', '%' . request('province_id') . '%');
-            // ->orwhere('district_id', 'like', '%' . request('district_id') . '%')
-            // ->orwhere('ward_id', 'like', '%' . request('ward_id') . '%');
+
+        if ($searchTerm = Arr::get($filters, 'news_header')) {
+            $query->where('news_header', 'LIKE', '%' . $searchTerm . '%');
         }
+
+        if ($category = Arr::get($filters, 'category_id')) {
+            $query->where('category_id', $category);
+        }
+
+        if ($province = Arr::get($filters, 'province_id')) {
+            $query->where('province_id', $province);
+        }
+
+        if ($district = Arr::get($filters, 'district_id')) {
+            $query->where('district_id', $district);
+        }
+
+        if ($ward = Arr::get($filters, 'ward_id')) {
+            $query->where('ward_id', $ward);
+        }
+
+        // Add more conditions as needed...
+
+        return $query;
     }
 
     //Relationship to user

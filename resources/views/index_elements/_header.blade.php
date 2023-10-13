@@ -3,7 +3,6 @@
         <div>
             <x-header.header-list-info :categories="$categories" />
         </div>
-
         @auth
         @if(auth()->user()->type == 'VIP')
         <div class="login">
@@ -42,8 +41,9 @@
         <div class="extension">
             <div class="logobar">
                 <p class="openSidepanel" onclick="openNav()"> <i class="fa fa-bars" aria-hidden="true"></i> </p>
-                <a href="/"><img src="https://cdn.batdongsan.vn/upload/thumb/file/2022/10/0001/logo.png"
-                        alt="company-logo" height=" 30px"></a>
+                <a href="/" type="image/webp"><img
+                        src="https://cdn.batdongsan.vn/upload/thumb/file/2022/10/0001/logo.png" alt="company-logo"
+                        height=" 30px"></a>
             </div>
 
             <div id="mySidepanel" class="sidepanel">
@@ -77,7 +77,7 @@
             </div>
             <div class="toggle_searchbar">
                 <div id="default_search">
-                    <form action="">
+                    <form action="{{route('search_news')}}" method="GET">
                         <div class="searchbar">
                             <div class="fastsearch">
                                 <select id="#">
@@ -87,7 +87,7 @@
                                 </select>
                             </div>
                             <div class="fastsearch">
-                                <select name="category">
+                                <select name="category_id">
                                     <option value="" disabled selected>Phân khúc</option>
                                     @foreach($categories as $category)
                                     <option value="{{$category->id}}">{{$category->type_name}}</option>
@@ -113,7 +113,7 @@
                     <a onclick="openSearchBar()"
                         style="text-decoration:none; color:black; cursor: pointer; padding: 10px">
                         <i class="fa fa-chevron-down" aria-hidden="true"></i>Nâng cao</a>
-                    <button style="background-color: #01b0f1"> <a href="{{route('userCreateNews')}}"
+                    <button style="background-color:         #01b0f1"> <a href="{{route('userCreateNews')}}"
                             style="text-decoration: none; color:#fff"> <i class="fa fa-paper-plane-o"
                                 aria-hidden="true"></i> ĐĂNG TIN</a></button>
                 </div>
@@ -144,11 +144,15 @@
     function openSearchBar() {
         var default_search_bar = document.getElementById("default_search");
         var advance_search_bar = document.getElementById("search_toggle");
+        var temp_search_bar = document.getElementById("search_view");
+        
         if (advance_search_bar.style.display == "none") {
             advance_search_bar.style.display = "block";
+            temp_search_bar.style.display = "none";
         } else {
             default_search_bar.style.display == "block";
             advance_search_bar.style.display = "none";
+            temp_search_bar.style.display = "block";
         }
     }
 </script>

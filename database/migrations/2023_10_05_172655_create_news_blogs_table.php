@@ -13,12 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('permissions', function (Blueprint $table) {
+        Schema::create('news_blogs', function (Blueprint $table) {
             $table->id();
-            $table->string("permission_name");
-            $table->string("base_action")->nullable();
-            $table->string("action_id")->nullable();
             $table->timestamps();
+            $table->longText('text');
+            $table->text('date');
+            $table->string('title');
+            $table->string('type');
+            $table->string('slug');
         });
     }
 
@@ -29,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('permissions');
+        Schema::dropIfExists('news_blogs');
     }
 };

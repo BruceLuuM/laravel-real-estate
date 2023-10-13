@@ -58,27 +58,28 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="form-group">
-                                        <label for="InputEmail1">Role name: </label>
-                                        <input type="text" name="name" class="form-control"
-                                            placeholder="Enter Role name">
+                                        <label for="InputEmail1">Permission name: </label>
+                                        <input type="text" name="permission_name" class="form-control"
+                                            placeholder="Enter Permission name">
                                     </div>
-                                    @error('name')
+                                    @error('permission_name')
                                     <p class="error"> {{$message}} </p>
                                     @enderror
 
                                     <div class="form-group">
                                         <label for="permissions_action_function_id">Custom role</label>
                                         <select class="select2" multiple="multiple"
-                                            data-placeholder="Roles of permission" style="width: 100%;"
-                                            name="permissions_action_function_id[]" id="RoleID">
+                                            data-placeholder="Roles of permission" style="width: 100%;" name="custom[]"
+                                            id="RoleID">
                                             @foreach($permissions_actions as $permissions_action)
                                             <option value="{{$permissions_action->id}}">
-                                                {{$permissions_action->permissions_action_name}}
+                                                {{$permissions_action->action_name}} --
+                                                {{$permissions_action->description}}
                                             </option>
                                             @endforeach
                                         </select>
                                     </div>
-                                    @error('permissions_action_function_id')
+                                    @error('custom')
                                     <p class="text-danger"> {{$message}} </p>
                                     @enderror
                                 </div>
@@ -113,7 +114,7 @@
                                     <input type="checkbox" id="checkAll" class="mr-2">
                                 </div>
                             </div>
-                            <table id="Mod" class="table table-bordered table-striped">
+                            <table id="CrePer" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
                                         <th>#</th>
@@ -146,26 +147,26 @@
                                         </td>
                                         <td>
                                             <div class="form-check text-center">
-                                                <input type="checkbox" class="form-check-input" name="watch"
-                                                    id="w{{$module->id}}">
+                                                <input type="checkbox" class="form-check-input" name="base[]"
+                                                    id="w{{$module->id}}" value="w{{$module->id}}">
                                             </div>
                                         </td>
                                         <td>
                                             <div class="form-check text-center">
-                                                <input type="checkbox" class="form-check-input" name="create"
-                                                    id="c{{$module->id}}">
+                                                <input type="checkbox" class="form-check-input" name="base[]"
+                                                    id="c{{$module->id}}" value="c{{$module->id}}">
                                             </div>
                                         </td>
                                         <td>
                                             <div class="form-check text-center">
-                                                <input type="checkbox" class="form-check-input" name="edit"
-                                                    id="e{{$module->id}}">
+                                                <input type="checkbox" class="form-check-input" name="base[]"
+                                                    id="e{{$module->id}}" value="e{{$module->id}}">
                                             </div>
                                         </td>
                                         <td>
                                             <div class="form-check text-center">
-                                                <input type="checkbox" class="form-check-input" name="delete"
-                                                    id="d{{$module->id}}">
+                                                <input type="checkbox" class="form-check-input" name="base[]"
+                                                    id="d{{$module->id}}" value="d{{$module->id}}">
                                             </div>
                                         </td>
                                     </tr>
@@ -176,42 +177,46 @@
                     </div>
                     <!-- /.card -->
                 </div>
-                <form action="{{route('adminStorePermission')}}" method="post" id="PermissionCreateForm">
-                    <div class="card card-secondary">
-                        <div class="card-header">
-                            <h3 class="card-title">Permission Custom Rules</h3>
-                            <div class="card-tools">
-                                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                                    <i class="fas fa-minus"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <fieldset class="border rounded p-2">
-                                <legend class="text-center">Custom Structure</legend>
-                                <div class="form-group">
-                                    <label for="InputEmail1">Role name: </label>
-                                    <input type="text" name="name" class="form-control" placeholder="Enter Role name">
-                                </div>
-                                @error('name')
-                                <p class="error"> {{$message}} </p>
-                                @enderror
-                                <div class="form-group">
-                                    <label for="InputEmail1">Description: </label>
-                                    <textarea name="name" class="form-control" rows="4"
-                                        placeholder="Role descriptions"></textarea>
-                                </div>
-                                @error('name')
-                                <p class="error"> {{$message}} </p>
-                                @enderror
-                            </fieldset>
-                        </div>
-                        <!-- /.card -->
-                    </div>
-                </form>
+    </form>
+    <form action="{{route('adminStorePermissionAction')}}" method="post" id="PermissionCreateForm">
+        @csrf
+        <div class="card card-secondary collapsed-card">
+            <div class="card-header">
+                <h3 class="card-title">Make a Custom Roles</h3>
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                </div>
             </div>
+            <div class="card-body">
+                <fieldset class="border rounded p-2">
+                    <legend class="text-center">Custom Structure</legend>
+                    <div class="form-group">
+                        <label for="InputEmail1">Name: </label>
+                        <input type="text" name="action_name" class="form-control" placeholder="Enter Role name">
+                    </div>
+                    @error('action_name')
+                    <p class="error"> {{$message}} </p>
+                    @enderror
+                    <div class="form-group">
+                        <label for="InputEmail1">Description: </label>
+                        <textarea name="description" class="form-control" rows="4"
+                            placeholder="Role descriptions"></textarea>
+                    </div>
+                    @error('description')
+                    <p class="error"> {{$message}} </p>
+                    @enderror
+                </fieldset>
+                <div class="col-12">
+                    <button type="commit" class="btn btn-success float-right">Create</button>
+                </div>
+            </div>
+            <!-- /.card -->
         </div>
     </form>
+    </div>
+    </div>
 
 </section>
 @endsection
@@ -238,7 +243,7 @@
 
     // fast search attr
     $(function () {
-        $("#AdRo")
+        $("#CrePer")
           .DataTable({
             responsive: true,
             lengthChange: false,
@@ -246,7 +251,7 @@
           })
           .buttons()
           .container()
-          .appendTo("#AdRo_wrapper .col-md-6:eq(0)");
+          .appendTo("#CrePer_wrapper .col-md-6:eq(0)");
       });
 </script>
 @endpush

@@ -1,6 +1,6 @@
 @extends('adminLTE.layout.master')
-@section('title','Admin Category Management')
-@section('CategoriesManagement','active')
+@section('title','Admin Invester Management')
+@section('InvestersManagement','active')
 
 @section('page-level-style')
 <style type="text/css">
@@ -13,12 +13,12 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Category Edit</h1>
+                <h1>Invester Edit</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active">Category Edit</li>
+                    <li class="breadcrumb-item active">Invester Edit</li>
                 </ol>
             </div>
         </div>
@@ -27,15 +27,15 @@
 
 <!-- Main content -->
 <section class="content">
-    <form action="{{route('adminUpdateCategory',['category'=>$category->id]);}}" method="post">
+    <form action="{{route('adminUpdateInvester',['invester'=>$invester->id]);}}" method="post"
+        enctype="multipart/form-data">
         @csrf
         @method('PUT')
         <div class=" row">
             <div class="col-md">
                 <div class="card card-primary">
                     <div class="card-header">
-                        <h3 class="card-title">Editting Category ID: {{$category->id}}</h3>
-
+                        <h3 class="card-title">Editting Invester ID: {{$invester->id}}</h3>
                         <div class="card-tools">
                             <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
                                 <i class="fas fa-minus"></i>
@@ -44,77 +44,59 @@
                     </div>
                     <div class="card-body">
                         <div class="form-group">
-                            <label for="purpose">Purpose</label>
-                            <select name="purpose" class="form-control custom-select">
-                                <option value="Bán" @if ($category->purpose=='Bán') {{'selected'}} @endif>Bán
-                                </option>
-                                <option value="Cho thuê" @if ($category->purpose=='Cho thuê') {{'selected'}} @endif>Cho
-                                    thuê
-                                </option>
-                            </select>
-                            @error('purpose')
-                            <p class="error"> {{$message}} </p>
+                            <label for="name">Invester name:</label>
+                            <input type="text" name="name" class="form-control" value="{{$invester->name}}">
+                            @error('name')
+                            <p class=" error"> {{$message}} </p>
                             @enderror
                         </div>
 
                         <div class="form-group">
-                            <label for="decription">Decription</label>
-                            <textarea id="decription" class="form-control" rows="4"
-                                placeholder="Add Category description here">{{$category->description}}</textarea>
+                            <label for="nums_project">Number of present project:</label>
+                            <input placeholder="..." type="text" name="nums_project" class="form-control"
+                                value="{{$invester->nums_project}}">
+                            @error('nums_project')
+                            <p class="error">{{$message}}</p>
+                            @enderror
                         </div>
-                        <div class="form-group">
-                            <label for="type">Type</label>
-                            <select name="type" class="form-control custom-select">
-                                <option value="" disabled>Select one</option>
-                                <option value="Nhà" @if ($category->type=='Nhà') {{'selected'}} @endif> Nhà
-                                </option>
-                                <option value="Đất" @if ($category->type=='Đất') {{'selected'}} @endif> Đất
-                                </option>
-                                <option value="Căn hộ chung cư" @if ($category->type=='Căn hộ chung cư') {{'selected'}}
-                                    @endif>Căn hộ
-                                    chung cư
-                                </option>
-                                <option value="Văn phòng" @if ($category->type=='Văn phòng') {{'selected'}} @endif>Văn
-                                    phòng
-                                </option>
-                                <option value="Biệt thự" @if ($category->type=='Biệt thự ') {{'selected'}} @endif>Biệt
-                                    thự
-                                </option>
-                                <option value="BĐS thương mại" @if ($category->type=='BĐS thương mại') {{'selected'}}
-                                    @endif> BĐS thương
-                                    mại
-                                </option>
-                                <option value="BĐS dịch vụ" @if ($category->type=='BĐS thương mại') {{'selected'}}
-                                    @endif>BĐS dịch vụ
-                                </option>
-                                <option value="BĐS nông nghiệp" @if ($category->type=='BĐS nông nghiệp') {{'selected'}}
-                                    @endif>BĐS nông
-                                    nghiệp
-                                </option>
-                                <option value="BĐS công nghiệp" @if ($category->type=='BĐS công nghiệp ') {{'selected'}}
-                                    @endif>BĐS
-                                    công nghiệp
-                                </option>
-                                <option value="BĐS tâm linh" @if ($category->type=='BĐS tâm linh') {{'selected'}}
-                                    @endif>BĐS
-                                    tâm linh
-                                </option>
-                                <option value="BĐS khác" @if ($category->type=='BĐS khác') {{'selected'}} @endif>BĐS
-                                    khác
-                                </option>
-                            </select>
-                        </div>
-                        @error('type')
-                        <p class="error"> {{$message}} </p>
-                        @enderror
 
                         <div class="form-group">
-                            <label for="type_name">Type name</label>
-                            <input type="text" name="type_name" class="form-control" value="{{$category->type_name}}">
+                            <label for="brief">Invester's brief:</label>
+                            <textarea name="brief" class="form-control">{{$invester->brief}}</textarea>
+                            @error('brief')
+                            <p class="error">{{$message}}</p>
+                            @enderror
                         </div>
-                        @error('type_name')
-                        <p class=" error"> {{$message}} </p>
-                        @enderror
+
+                        <div class="form-group">
+                            <label for="description">Invester's description:</label>
+                            <textarea name="description" id="editorAdmin"
+                                class="form-control">{{$invester->description}}</textarea>
+                            @error('description')
+                            <p class="error">{{$message}}</p>
+                            @enderror
+                        </div>
+
+                        <div class="form-group">
+                            <label for="invester_logo">File input</label>
+                            <div class="input-group">
+                                <div class="custom-file">
+                                    <input type="file" name="invester_logo" class="custom-file-input"
+                                        id="invester_logo">
+                                    <label class="custom-file-label" for="invester_logo">Choose
+                                        file</label>
+                                </div>
+
+                                <div class="input-group-append">
+                                    <span class="input-group-text">Upload</span>
+                                </div>
+                                @error('invester_logo')
+                                <p class="error">{{$message}}</p>
+                                @enderror
+                            </div>
+                            <img src="{{$invester->invester_logo ? asset('storage/'. $invester->invester_logo) : asset('/images/no_image.jpg')}}"
+                                alt="" class="img-circle elevation-2" width="100" height="100">
+                        </div>
                     </div>
                     <!-- /.card-body -->
                 </div>
@@ -124,8 +106,8 @@
         </div>
         <div class="row">
             <div class="col-12">
-                <a href="{{route('adminManageCategory')}}" class="btn btn-secondary">Cancel</a>
-                <button type="commit" class="btn btn-success float-right"> Save changes</button>
+                <a href="{{route('adminManageInvester')}}" class="btn btn-secondary">Cancel</a>
+                <button type="commit" class="btn btn-success float-right">Save changes</button>
             </div>
         </div>
     </form>

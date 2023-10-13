@@ -138,6 +138,9 @@
             lengthChange: false,
             autoWidth: false,
             buttons: ["copy", "csv", "excel", "pdf", "print", "colvis"],
+            exportOptions: {
+                columns: ':not(:last-child)'
+            },
           })
           .buttons()
           .container()

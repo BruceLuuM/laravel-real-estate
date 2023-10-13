@@ -45,9 +45,9 @@
                     @error('invester_logo')
                     <p class="error">{{$message}}</p>
                     @enderror
-                    <img src="{{$invester->invester_logo ? asset('storage/'. $invester->invester_logo) : asset('/images/no_image.jpg')}}"
-                        alt="">
                 </div>
+                <img src="{{$invester->invester_logo ? asset('storage/'. $invester->invester_logo) : asset('/images/no_image.jpg')}}"
+                    alt="">
                 <div class="post_page">
                     <button name="commit"
                         style="background-color:#285ea6; border: 2px solid #fff; border-radius:7px; height:50px; width:100px; color: #fff; cursor:pointer">Create</button>

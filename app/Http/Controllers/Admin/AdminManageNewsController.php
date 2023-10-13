@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\News;
+
+
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -10,19 +12,34 @@ use Illuminate\Support\Facades\Storage;
 
 class AdminManageNewsController extends Controller
 {
-
     public function index()
     {
         return view('admin.manage_news.index', [
             'news' => News::latest()->paginate(5),
-
         ]);
     }
+
+    public function index_LTE()
+    {
+        return view('adminLTE.manage_news.manage', [
+            'news' => News::latest()->paginate(5),
+        ]);
+    }
+
+    public function show(News $new)
+    {
+        return view('adminLTE.manage_news.show', [
+            'new' => $new,
+        ]);
+    }
+
 
     //show create form
     public function create()
     {
-        return view('admin.manage_news.create');
+        return view('adminLTE.manage_news.create', [
+            'distr'
+        ]);
     }
 
     //store new data
@@ -52,16 +69,15 @@ class AdminManageNewsController extends Controller
 
         $formFields['user_id'] = auth()->id();
         $formFields['slug'] = Str::slug($request->news_header);
-
         News::create($formFields);
 
-        return redirect()->route('adminManageNews');
+        return redirect()->route('adminManageNew');
     }
 
     // show edit form
     public function edit(News $new)
     {
-        return view('admin.manage_news.edit', [
+        return view('adminLTE.manage_news.edit', [
             'new' => $new,
         ]);
     }
@@ -97,7 +113,7 @@ class AdminManageNewsController extends Controller
 
         $new->update($formFields);
         $new->touch();
-        return redirect()->route('adminManageNews');
+        return redirect()->route('adminManageNew');
     }
 
     //delete ~ destroy
@@ -108,6 +124,6 @@ class AdminManageNewsController extends Controller
         }
         // unlink('storage/' . $new->images);
         $new->delete();
-        return redirect()->route('adminManageNews');
+        return redirect()->route('adminManageNew');
     }
 }

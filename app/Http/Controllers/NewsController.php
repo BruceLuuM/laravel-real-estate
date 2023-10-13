@@ -22,7 +22,6 @@ class NewsController extends Controller
             'categories' => Category::latest()->paginate(10),
             'investers' => Invester::latest()->paginate(5),
             'projects' => Project::latest()->paginate(5),
-
         ]);
     }
 
@@ -142,5 +141,14 @@ class NewsController extends Controller
     public function manage()
     {
         return view('news.manage', ['news' => auth()->user()->news]);
+    }
+
+    public function search_news(Request $request)
+    {
+        //new_stuff
+        $news = News::filter($request->only(['news_header', 'category_id', 'province_id', 'district_id', 'ward_id']))->paginate(10);
+        $categories = Category::latest()->paginate(10);
+        $investers = Invester::latest()->paginate(5);
+        return view('search_view.index', compact('news', 'categories', 'investers'));
     }
 }
